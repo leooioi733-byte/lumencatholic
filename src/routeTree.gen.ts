@@ -10,11 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BibliotecaRouteImport } from './routes/biblioteca'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as InicioRouteImport } from './routes/inicio'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as TrilhaRouteImport } from './routes/trilha'
+import { Route as LicaoIdRouteImport } from './routes/licao.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaRoute = BibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CadastroRoute = CadastroRouteImport.update({
@@ -22,31 +32,93 @@ const CadastroRoute = CadastroRouteImport.update({
   path: '/cadastro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InicioRoute = InicioRouteImport.update({
+  id: '/inicio',
+  path: '/inicio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhaRoute = TrilhaRouteImport.update({
+  id: '/trilha',
+  path: '/trilha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LicaoIdRoute = LicaoIdRouteImport.update({
+  id: '/licao/$id',
+  path: '/licao/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/inicio': typeof InicioRoute
+  '/perfil': typeof PerfilRoute
+  '/trilha': typeof TrilhaRoute
+  '/licao/$id': typeof LicaoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/inicio': typeof InicioRoute
+  '/perfil': typeof PerfilRoute
+  '/trilha': typeof TrilhaRoute
+  '/licao/$id': typeof LicaoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/inicio': typeof InicioRoute
+  '/perfil': typeof PerfilRoute
+  '/trilha': typeof TrilhaRoute
+  '/licao/$id': typeof LicaoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cadastro'
+  fullPaths:
+    | '/'
+    | '/biblioteca'
+    | '/cadastro'
+    | '/inicio'
+    | '/perfil'
+    | '/trilha'
+    | '/licao/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cadastro'
-  id: '__root__' | '/' | '/cadastro'
+  to:
+    | '/'
+    | '/biblioteca'
+    | '/cadastro'
+    | '/inicio'
+    | '/perfil'
+    | '/trilha'
+    | '/licao/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/biblioteca'
+    | '/cadastro'
+    | '/inicio'
+    | '/perfil'
+    | '/trilha'
+    | '/licao/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BibliotecaRoute: typeof BibliotecaRoute
   CadastroRoute: typeof CadastroRoute
+  InicioRoute: typeof InicioRoute
+  PerfilRoute: typeof PerfilRoute
+  TrilhaRoute: typeof TrilhaRoute
+  LicaoIdRoute: typeof LicaoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +130,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca': {
+      id: '/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof BibliotecaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cadastro': {
       id: '/cadastro'
       path: '/cadastro'
@@ -65,12 +144,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CadastroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inicio': {
+      id: '/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof InicioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilha': {
+      id: '/trilha'
+      path: '/trilha'
+      fullPath: '/trilha'
+      preLoaderRoute: typeof TrilhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/licao/$id': {
+      id: '/licao/$id'
+      path: '/licao/$id'
+      fullPath: '/licao/$id'
+      preLoaderRoute: typeof LicaoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BibliotecaRoute: BibliotecaRoute,
   CadastroRoute: CadastroRoute,
+  InicioRoute: InicioRoute,
+  PerfilRoute: PerfilRoute,
+  TrilhaRoute: TrilhaRoute,
+  LicaoIdRoute: LicaoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
