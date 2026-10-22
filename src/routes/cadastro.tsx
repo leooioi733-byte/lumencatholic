@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowLeft, Check, Eye, EyeOff } from "lucide-react";
 import mascote from "@/assets/lumen-mascote.png";
-import { LumenButton } from "@/components/ui/lumen-button";
+import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
 import { cn } from "@/lib/utils";
 import {
   emptyOnboarding,
@@ -81,8 +81,8 @@ function Cadastro() {
         <p className="animate-rise mt-2 text-muted-foreground [animation-delay:120ms]">
           Seu perfil está pronto. Sua primeira lição será “O que é a Bíblia?”.
         </p>
-        <Link to="/" className="mt-10 w-full">
-          <LumenButton variant="gold">Continuar</LumenButton>
+        <Link to="/inicio" className={cn(lumenButton({ variant: "gold" }), "mt-10")}>
+          Continuar
         </Link>
       </main>
     );
@@ -169,7 +169,7 @@ function Cadastro() {
               <input
                 value={data.nickname}
                 onChange={(e) => set({ nickname: e.target.value })}
-                maxLength={30}
+                maxLength={40}
                 placeholder="Como quer ser chamado?"
                 className="w-full rounded-2xl border-2 border-border bg-card px-4 py-3.5 text-lg text-foreground outline-none transition focus:border-gold"
               />
@@ -199,7 +199,7 @@ function Cadastro() {
                   isPasswordValid(password) ? "text-secondary" : "text-muted-foreground",
                 )}
               >
-                {password.length}/{MIN_PASSWORD} caracteres
+                {isPasswordValid(password) ? "✓ Senha válida" : `Mínimo de ${MIN_PASSWORD} caracteres`}
               </span>
             </label>
           </Step>

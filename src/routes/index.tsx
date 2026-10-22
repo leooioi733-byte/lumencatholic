@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import mascote from "@/assets/lumen-mascote.png";
-import { LumenButton } from "@/components/ui/lumen-button";
+import { lumenButton } from "@/components/ui/lumen-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,10 +52,8 @@ function Welcome() {
       </section>
 
       <div className="animate-rise space-y-4 [animation-delay:300ms]">
-        <Link to="/cadastro" className="block">
-          <LumenButton>Começar</LumenButton>
-        </Link>
-        <LumenButton variant="outline">Já tenho uma conta</LumenButton>
+        <Link to="/cadastro" className={lumenButton()}>Começar</Link>
+        <Link to="/inicio" className={lumenButton({ variant: "outline" })}>Já tenho uma conta</Link>
       </div>
     </main>
   );

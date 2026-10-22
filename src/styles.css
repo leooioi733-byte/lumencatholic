@@ -51,6 +51,8 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --color-primary-deep: var(--primary-deep);
@@ -80,6 +82,10 @@
   --primary-foreground: oklch(0.985 0.02 88);
   --secondary: oklch(0.4 0.11 6);
   --secondary-foreground: oklch(0.985 0.02 88);
+  --success: oklch(0.62 0.13 150);
+  --success-deep: oklch(0.48 0.11 150);
+  --success-foreground: oklch(0.985 0.02 88);
+  --destructive-deep: oklch(0.45 0.2 27);
   --gold: oklch(0.83 0.13 80);
   --gold-deep: oklch(0.68 0.13 70);
   --gold-foreground: oklch(0.3 0.09 5);
