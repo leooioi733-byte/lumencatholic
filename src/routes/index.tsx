@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import mascote from "@/assets/lumen-mascote.png";
 import { LumenButton } from "@/components/ui/lumen-button";
 
@@ -52,7 +52,9 @@ function Welcome() {
       </section>
 
       <div className="animate-rise space-y-4 [animation-delay:300ms]">
-        <LumenButton>Começar</LumenButton>
+        <Link to="/cadastro" className="block">
+          <LumenButton>Começar</LumenButton>
+        </Link>
         <LumenButton variant="outline">Já tenho uma conta</LumenButton>
       </div>
     </main>
