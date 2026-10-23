@@ -1,23 +1,10 @@
-// Conteúdo baseado na Sagrada Escritura e no Catecismo da Igreja Católica (CIC).
-export type Teaching = { title: string; text: string; source: string };
-export type Question = {
-  prompt: string;
-  options: string[];
-  answer: number;
-  explanation: string;
-};
-export type Lesson = {
-  id: string;
-  title: string;
-  emoji: string;
-  xp: number;
-  teachings: Teaching[];
-  questions: Question[];
-};
+import { ADDITIONAL_UNITS } from "./lesson-units";
+import type { Lesson, LessonUnit } from "./lesson-types";
+export type { Teaching, Question, Lesson, LessonUnit } from "./lesson-types";
 
 export const UNIT_TITLE = "Fundamentos da fé católica";
 
-export const LESSONS: Lesson[] = [
+const FOUNDATION_LESSONS: Lesson[] = [
   {
     id: "biblia",
     title: "O que é a Bíblia?",
@@ -277,6 +264,16 @@ export const LESSONS: Lesson[] = [
     ],
   },
 ];
+
+export const UNITS: LessonUnit[] = [
+  { id: "fundamentos", title: UNIT_TITLE, emoji: "📖", lessons: FOUNDATION_LESSONS },
+  ...ADDITIONAL_UNITS,
+];
+export const LESSONS: Lesson[] = UNITS.flatMap((unit) => unit.lessons);
+
+export function getLessonUnit(id: string) {
+  return UNITS.find((unit) => unit.lessons.some((lesson) => lesson.id === id));
+}
 
 export function getLesson(id: string) {
   return LESSONS.find((l) => l.id === id);
