@@ -59,7 +59,8 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
   }
 
   const isTeaching = step < nT;
-  const q = !isTeaching ? lesson.questions[step - nT] : null;
+  const teaching = lesson.teachings[step];
+  const q = !isTeaching ? lesson.questions[step - nT] ?? null : null;
   const correct = q !== null && picked === q.answer;
 
   const advance = () => {
@@ -89,13 +90,13 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
       </div>
 
       <div key={step} className="animate-rise flex flex-1 flex-col pt-8">
-        {isTeaching ? (
+        {isTeaching && teaching ? (
           <>
             <p className="text-sm font-bold uppercase text-secondary">Ensinamento {step + 1} de {nT}</p>
             <div className="mt-4 border-y-2 border-border py-6">
-              <h1 className="text-2xl font-semibold text-primary">{lesson.teachings[step].title}</h1>
-              <p className="mt-3 text-lg leading-relaxed text-foreground">{lesson.teachings[step].text}</p>
-              <p className="mt-4 text-sm font-bold text-muted-foreground">{lesson.teachings[step].source}</p>
+              <h1 className="text-2xl font-semibold text-primary">{teaching.title}</h1>
+              <p className="mt-3 text-lg leading-relaxed text-foreground">{teaching.text}</p>
+              <p className="mt-4 text-sm font-bold text-muted-foreground">{teaching.source}</p>
             </div>
             <MascotReaction mood="reading" className="mx-auto my-6 w-28" />
           </>

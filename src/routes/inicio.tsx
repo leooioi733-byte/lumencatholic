@@ -58,7 +58,7 @@ function Inicio() {
       </section>
 
       <h2 className="mt-8 text-xl font-semibold text-primary">Trilha de estudos</h2>
-      <div className="mt-4"><LessonPath completed={progress.completed} unitId={unit?.id} /></div>
+      {unit && <div className="mt-4"><LessonPath completed={progress.completed} unitId={unit.id} /></div>}
       <Link to="/trilha" className={`${lumenButton({ variant: "outline" })} mt-4`}>Todas as unidades</Link>
     </AppShell>
   );
