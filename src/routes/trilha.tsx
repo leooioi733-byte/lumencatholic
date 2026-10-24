@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { LessonPath } from "@/components/LessonPath";
-import { UNIT_TITLE } from "@/lib/lessons";
+import { UNITS, LESSONS } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
 
 export const Route = createFileRoute("/trilha")({
   head: () => ({
     meta: [
       { title: "Trilha — Lumen" },
-      { name: "description", content: "Todas as lições da trilha Fundamentos da fé católica." },
+      { name: "description", content: "Unidades sobre a Bíblia, sacramentos, vida cristã, liturgia e oração, com fontes do Catecismo." },
       { property: "og:title", content: "Trilha — Lumen" },
-      { property: "og:description", content: "Todas as lições da trilha Fundamentos da fé católica." },
+      { property: "og:description", content: "Unidades sobre a Bíblia, sacramentos, vida cristã, liturgia e oração, com fontes do Catecismo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -22,10 +22,8 @@ function Trilha() {
   const { progress } = useProgress();
   return (
     <AppShell>
-      <div className="rounded-3xl bg-secondary p-5 text-secondary-foreground">
-        <p className="text-sm font-bold opacity-80">Unidade 1</p>
-        <h1 className="text-2xl font-semibold">{UNIT_TITLE}</h1>
-      </div>
+      <h1 className="text-2xl font-bold text-primary">Trilha de estudos</h1>
+      <p className="mb-6 mt-1 text-muted-foreground">{UNITS.length} unidades · {LESSONS.length} lições</p>
       <LessonPath completed={progress.completed} />
     </AppShell>
   );

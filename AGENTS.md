@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Lumen architecture
+- Keep catechetical units in typed data modules and reuse the same catalog in lessons, the path and the library so titles, order and teaching sources stay consistent.
+- Render lesson sessions keyed by lesson ID so navigation to a different lesson resets answers, feedback and completion state.
+- Use a shared mascot-reaction component with fixed-size stages and CSS transform/opacity animation so feedback remains smooth without shifting the lesson layout.

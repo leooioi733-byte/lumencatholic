@@ -1,15 +1,25 @@
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { LESSONS, nextLesson } from "@/lib/lessons";
+import { UNITS, nextLesson } from "@/lib/lessons";
 import { cn } from "@/lib/utils";
 
 const OFFSETS = ["translate-x-0", "translate-x-12", "translate-x-16", "translate-x-8", "-translate-x-8", "-translate-x-14"];
 
-export function LessonPath({ completed }: { completed: string[] }) {
+export function LessonPath({ completed, unitId }: { completed: string[]; unitId?: string }) {
   const next = nextLesson(completed);
   return (
-    <ol className="flex flex-col items-center gap-6 py-4">
-      {LESSONS.map((l, i) => {
+    <div className="space-y-8">
+      {UNITS.filter((unit) => !unitId || unit.id === unitId).map((unit) => (
+        <section key={unit.id} aria-labelledby={`unit-${unit.id}`}>
+          <header className="border-y-2 border-border py-4">
+            <div className="flex items-center justify-between gap-3 text-sm font-bold text-secondary">
+              <span>Unidade {UNITS.indexOf(unit) + 1}</span>
+              <span className="shrink-0">{unit.lessons.filter((l) => completed.includes(l.id)).length}/{unit.lessons.length}</span>
+            </div>
+            <h2 id={`unit-${unit.id}`} className="mt-1 text-xl font-semibold text-primary">{unit.emoji} {unit.title}</h2>
+          </header>
+          <ol className="flex flex-col items-center gap-6 py-6">
+      {unit.lessons.map((l, i) => {
         const done = completed.includes(l.id);
         const current = next?.id === l.id;
         return (
@@ -31,6 +41,9 @@ export function LessonPath({ completed }: { completed: string[] }) {
           </li>
         );
       })}
-    </ol>
+          </ol>
+        </section>
+      ))}
+    </div>
   );
 }
