@@ -7,3 +7,7 @@
 - [x] Variações oficiais do cordeirinho e reações cartoonescas de acerto, erro e conclusão
 - [x] Verificar lições, progresso e animações em celular e computador
 - [x] Corrigir erros pendentes e atualizar testes para as novas unidades
+- [ ] Integrar Orações à navegação e criar biblioteca tradicional com leitura ajustável e favoritos
+- [ ] Criar Terço guiado com mistérios do dia, configuração, sequência completa e progresso na sessão
+- [ ] Organizar outras devoções sem oferecer conteúdos incompletos
+- [ ] Verificar navegação, favoritos, sequência do terço, celulares e regressões do aprendizado
