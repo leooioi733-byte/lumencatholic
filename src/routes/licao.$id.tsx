@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { X } from "lucide-react";
-import mascote from "@/assets/lumen-mascote.png";
+import { Check, X } from "lucide-react";
+import { MascotReaction } from "@/components/MascotReaction";
 import { ProgressBar } from "@/components/AppShell";
 import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
-import { getLesson, lessonXp } from "@/lib/lessons";
+import { getLesson, lessonXp, type Lesson } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/licao/$id")({
   loader: ({ params }) => {
     const lesson = getLesson(params.id);
     if (!lesson) throw notFound();
-    return { title: lesson.title };
+    return { title: lesson.title, lesson };
   },
   head: ({ loaderData }) => ({
     meta: [
@@ -28,8 +28,11 @@ export const Route = createFileRoute("/licao/$id")({
 });
 
 function Licao() {
-  const { id } = Route.useParams();
-  const lesson = getLesson(id)!;
+  const { lesson } = Route.useLoaderData();
+  return <LessonSession key={lesson.id} lesson={lesson} />;
+}
+
+function LessonSession({ lesson }: { lesson: Lesson }) {
   const { complete } = useProgress();
   const nT = lesson.teachings.length;
   const nQ = lesson.questions.length;
@@ -43,12 +46,7 @@ function Licao() {
   if (earned !== null) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6 text-center">
-        <div className="relative">
-          {["-left-6 top-0", "-right-4 top-6", "left-2 -bottom-2", "right-0 bottom-4"].map((p, i) => (
-            <span key={i} className={cn("animate-halo absolute text-3xl text-gold", p)}>✦</span>
-          ))}
-          <img src={mascote} alt="Cordeirinho comemorando" className="animate-float-soft w-40" />
-        </div>
+        <MascotReaction mood="celebrate" className="w-48" />
         <h1 className="animate-rise mt-6 text-3xl font-bold text-primary">Lição concluída!</h1>
         <p className="animate-rise mt-2 text-muted-foreground">{lesson.title}</p>
         <div className="animate-rise mt-6 rounded-2xl bg-gold px-6 py-3 font-display text-2xl font-bold text-gold-foreground">
@@ -61,8 +59,9 @@ function Licao() {
   }
 
   const isTeaching = step < nT;
-  const q = !isTeaching ? lesson.questions[step - nT] : null;
-  const correct = q && picked === q.answer;
+  const teaching = lesson.teachings[step];
+  const q = !isTeaching ? lesson.questions[step - nT] ?? null : null;
+  const correct = q !== null && picked === q.answer;
 
   const advance = () => {
     if (step + 1 >= total) {
@@ -76,6 +75,7 @@ function Licao() {
     setChecked(false);
   };
   const check = () => {
+    if (picked === null || checked || !q) return;
     setChecked(true);
     if (!correct) setMistakes((m) => m + 1);
   };
@@ -86,19 +86,19 @@ function Licao() {
         <Link to="/inicio" aria-label="Sair da lição" className="text-muted-foreground">
           <X className="h-7 w-7" />
         </Link>
-        <ProgressBar value={(step / total) * 100} />
+        <ProgressBar value={((step + (checked ? 1 : 0)) / total) * 100} />
       </div>
 
       <div key={step} className="animate-rise flex flex-1 flex-col pt-8">
-        {isTeaching ? (
+        {isTeaching && teaching ? (
           <>
             <p className="text-sm font-bold uppercase text-secondary">Ensinamento {step + 1} de {nT}</p>
-            <div className="mt-4 rounded-3xl border-2 border-border bg-card p-6">
-              <h1 className="text-2xl font-semibold text-primary">{lesson.teachings[step].title}</h1>
-              <p className="mt-3 text-lg leading-relaxed text-foreground">{lesson.teachings[step].text}</p>
-              <p className="mt-4 text-sm font-bold text-muted-foreground">{lesson.teachings[step].source}</p>
+            <div className="mt-4 border-y-2 border-border py-6">
+              <h1 className="text-2xl font-semibold text-primary">{teaching.title}</h1>
+              <p className="mt-3 text-lg leading-relaxed text-foreground">{teaching.text}</p>
+              <p className="mt-4 text-sm font-bold text-muted-foreground">{teaching.source}</p>
             </div>
-            <img src={mascote} alt="" className="mx-auto mt-6 w-24" />
+            <MascotReaction mood="reading" className="mx-auto my-6 w-28" />
           </>
         ) : (
           q && (
@@ -111,20 +111,18 @@ function Licao() {
                     ? i === q.answer ? "right" : i === picked ? "wrong" : "idle"
                     : picked === i ? "sel" : "idle";
                   return (
-                    <button
+                    <LumenButton
                       key={o}
                       disabled={checked}
                       onClick={() => setPicked(i)}
-                      className={cn(
-                        "btn-3d w-full border-2 px-4 py-4 text-left font-sans text-base font-bold",
-                        state === "idle" && "border-border bg-card text-foreground [--btn-depth:var(--border)]",
-                        state === "sel" && "border-gold bg-accent text-primary [--btn-depth:var(--gold-deep)]",
-                        state === "right" && "border-success bg-card text-success [--btn-depth:var(--success-deep)]",
-                        state === "wrong" && "border-destructive bg-card text-destructive [--btn-depth:var(--destructive-deep)]",
-                      )}
+                      aria-pressed={picked === i}
+                      variant={state === "right" ? "rightAnswer" : state === "wrong" ? "wrongAnswer" : state === "sel" ? "selectedAnswer" : "answer"}
+                      className="justify-start gap-3 px-4 text-left font-sans text-base font-bold normal-case disabled:opacity-100"
                     >
-                      {o}
-                    </button>
+                      <span className="min-w-0 flex-1">{o}</span>
+                      {state === "right" && <Check aria-hidden="true" className="h-5 w-5 shrink-0" />}
+                      {state === "wrong" && <X aria-hidden="true" className="h-5 w-5 shrink-0" />}
+                    </LumenButton>
                   );
                 })}
               </div>
@@ -134,11 +132,14 @@ function Licao() {
       </div>
 
       {checked && q && (
-        <div className={cn("animate-rise mb-4 rounded-2xl p-4", correct ? "bg-success/15" : "bg-destructive/10")}>
-          <p className={cn("font-display text-lg font-bold", correct ? "text-success" : "text-destructive")}>
-            {correct ? "Muito bem!" : "Quase! Resposta correta:"}
-          </p>
-          <p className="text-sm text-foreground">{q.explanation}</p>
+        <div role="status" className={cn("animate-rise my-5 flex items-center gap-3 rounded-2xl p-3", correct ? "bg-success/15" : "bg-destructive/10")}>
+          <MascotReaction mood={correct ? "victory" : "oops"} className="w-20" />
+          <div className="min-w-0 flex-1">
+            <p className={cn("font-display text-lg font-bold", correct ? "text-success" : "text-destructive")}>
+              {correct ? "Muito bem!" : "Opa! Vamos aprender:"}
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-foreground">{q.explanation}</p>
+          </div>
         </div>
       )}
 
