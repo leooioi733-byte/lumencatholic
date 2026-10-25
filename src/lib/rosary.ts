@@ -39,14 +39,15 @@ export function mysteriesForDay(day: number): MysteryId {
 }
 
 export function getMysterySet(id: MysteryId) {
-  return MYSTERY_SETS.find((set) => set.id === id) ?? MYSTERY_SETS[0];
+  return (MYSTERY_SETS.find((set) => set.id === id) ?? MYSTERY_SETS[0]) as MysterySet;
 }
 
 // Texts are injected from the shared catalog, never duplicated in the reader.
-export function buildRosary(mysteryId: MysteryId, includeFatima: boolean, texts: Record<string, string>): RosaryStep[] {
+export function buildRosary(mysteryId: MysteryId, includeFatima: boolean, source: Record<string, string>): RosaryStep[] {
   const set = getMysterySet(mysteryId);
   const steps: RosaryStep[] = [];
-  const add = (id: string, title: string, text: string, section: string, extra: Partial<RosaryStep> = {}) => steps.push({ id, title, text, section, ...extra });
+  const texts = new Proxy(source, { get: (t, k: string) => t[k] ?? "" }) as Record<string, string> & { credo: string; fatima: string; agradecimento: string; responsorio: string };
+  const add = (id: string, title: string, text: string | undefined, section: string, extra: Partial<RosaryStep> = {}) => steps.push({ id, title, text: text ?? "", section, ...extra });
   add("inicio-cruz", "Sinal da Cruz", texts["sinal-da-cruz"], "Orações iniciais");
   add("inicio-credo", "Credo", texts.credo, "Orações iniciais");
   add("inicio-pai-nosso", "Pai-Nosso", texts["pai-nosso"], "Orações iniciais");

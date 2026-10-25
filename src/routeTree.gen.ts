@@ -16,6 +16,9 @@ import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as TrilhaRouteImport } from './routes/trilha'
 import { Route as LicaoIdRouteImport } from './routes/licao.$id'
+import { Route as OracoesIndexRouteImport } from './routes/oracoes.index'
+import { Route as OracoesIdRouteImport } from './routes/oracoes.$id'
+import { Route as OracoesTercoRouteImport } from './routes/oracoes.terco'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +55,21 @@ const LicaoIdRoute = LicaoIdRouteImport.update({
   path: '/licao/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OracoesIndexRoute = OracoesIndexRouteImport.update({
+  id: '/oracoes/',
+  path: '/oracoes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OracoesIdRoute = OracoesIdRouteImport.update({
+  id: '/oracoes/$id',
+  path: '/oracoes/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OracoesTercoRoute = OracoesTercoRouteImport.update({
+  id: '/oracoes/terco',
+  path: '/oracoes/terco',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +79,9 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/oracoes/$id': typeof OracoesIdRoute
+  '/oracoes/terco': typeof OracoesTercoRoute
+  '/oracoes/': typeof OracoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +91,9 @@ export interface FileRoutesByTo {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/oracoes/$id': typeof OracoesIdRoute
+  '/oracoes/terco': typeof OracoesTercoRoute
+  '/oracoes': typeof OracoesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +104,9 @@ export interface FileRoutesById {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/oracoes/$id': typeof OracoesIdRoute
+  '/oracoes/terco': typeof OracoesTercoRoute
+  '/oracoes/': typeof OracoesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +118,9 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/oracoes/$id'
+    | '/oracoes/terco'
+    | '/oracoes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +130,9 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/oracoes/$id'
+    | '/oracoes/terco'
+    | '/oracoes'
   id:
     | '__root__'
     | '/'
@@ -109,6 +142,9 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/oracoes/$id'
+    | '/oracoes/terco'
+    | '/oracoes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +155,9 @@ export interface RootRouteChildren {
   PerfilRoute: typeof PerfilRoute
   TrilhaRoute: typeof TrilhaRoute
   LicaoIdRoute: typeof LicaoIdRoute
+  OracoesIdRoute: typeof OracoesIdRoute
+  OracoesTercoRoute: typeof OracoesTercoRoute
+  OracoesIndexRoute: typeof OracoesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +211,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LicaoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/oracoes/': {
+      id: '/oracoes/'
+      path: '/oracoes'
+      fullPath: '/oracoes/'
+      preLoaderRoute: typeof OracoesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oracoes/$id': {
+      id: '/oracoes/$id'
+      path: '/oracoes/$id'
+      fullPath: '/oracoes/$id'
+      preLoaderRoute: typeof OracoesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oracoes/terco': {
+      id: '/oracoes/terco'
+      path: '/oracoes/terco'
+      fullPath: '/oracoes/terco'
+      preLoaderRoute: typeof OracoesTercoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +243,9 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilRoute: PerfilRoute,
   TrilhaRoute: TrilhaRoute,
   LicaoIdRoute: LicaoIdRoute,
+  OracoesIdRoute: OracoesIdRoute,
+  OracoesTercoRoute: OracoesTercoRoute,
+  OracoesIndexRoute: OracoesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpen, Home, Map, User } from "lucide-react";
+import { BookOpen, Flame, Home, Map, User } from "lucide-react";
 import type { ReactNode } from "react";
 
 const TABS = [
   { to: "/inicio", label: "Início", icon: Home },
   { to: "/trilha", label: "Trilha", icon: Map },
+  { to: "/oracoes", label: "Orações", icon: Flame },
   { to: "/biblioteca", label: "Biblioteca", icon: BookOpen },
   { to: "/perfil", label: "Perfil", icon: User },
 ] as const;
@@ -14,7 +15,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="mx-auto min-h-dvh max-w-md pb-24">
       <main className="animate-rise px-5 pt-6">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-border bg-card">
-        <ul className="mx-auto grid max-w-md grid-cols-4">
+        <ul className="mx-auto grid max-w-md grid-cols-5">
           {TABS.map(({ to, label, icon: Icon }) => (
             <li key={to}>
               <Link
