@@ -39,7 +39,7 @@ export function mysteriesForDay(day: number): MysteryId {
 }
 
 export function getMysterySet(id: MysteryId) {
-  return MYSTERY_SETS.find((set) => set.id === id) ?? MYSTERY_SETS[0];
+  return (MYSTERY_SETS.find((set) => set.id === id) ?? MYSTERY_SETS[0]) as MysterySet;
 }
 
 // Texts are injected from the shared catalog, never duplicated in the reader.
