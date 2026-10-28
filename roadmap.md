@@ -11,5 +11,5 @@
 - [x] Criar Terço guiado com mistérios do dia, configuração, sequência completa e progresso na sessão
 - [x] Organizar outras devoções sem oferecer conteúdos incompletos
 - [x] Verificar navegação, favoritos, sequência do terço, celulares e regressões do aprendizado
-- [ ] Adicionar música calma e efeitos de seleção, acerto e erro com opção de silenciar
-- [ ] Conferir sons, controles e regressões em celular e computador
+- [x] Adicionar música calma e efeitos de seleção, acerto e erro com opção de silenciar
+- [x] Conferir sons, controles e regressões em celular e computador
