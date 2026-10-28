@@ -11,6 +11,7 @@ import type { MysteryId } from "@/lib/prayer-types";
 import { PRAYER_TEXTS } from "@/lib/prayers";
 import { MYSTERY_SETS, MYSTERY_SOURCE, ROSARY_SOURCE, buildRosary, mysteriesForDay } from "@/lib/rosary";
 import { cn } from "@/lib/utils";
+import { useAudio } from "@/components/AudioProvider";
 
 export const Route = createFileRoute("/oracoes/terco")({
   head: () => ({
@@ -48,7 +49,8 @@ function Terco() {
   );
 
   const index = Math.min(session.index, steps.length - 1);
-  const step = steps[index]!;
+  const step = steps[index];
+  if (!step) return <AppShell>{back}</AppShell>;
   const last = index === steps.length - 1;
   const move = (d: -1 | 1) => setState((s) => s.rosary ? { ...s, rosary: moveRosary(s.rosary, d, steps.length) } : s);
 
@@ -60,7 +62,7 @@ function Terco() {
       <h1 className="mt-1 text-2xl font-bold text-primary">{step.title}</h1>
       {step.bead && (
         <div aria-label={`Conta ${step.bead} de 10`} className="mt-3 flex gap-1.5">
-          {Array.from({ length: 10 }, (_, i) => <span key={i} className={cn("h-3 w-3 rounded-full transition", i < step.bead! ? "bg-gold" : "bg-muted")} />)}
+          {Array.from({ length: 10 }, (_, i) => <span key={i} className={cn("h-3 w-3 rounded-full transition", i < (step.bead ?? 0) ? "bg-gold" : "bg-muted")} />)}
         </div>
       )}
       <div className="mt-4 flex items-center justify-between gap-2"><TextSizeControls />
@@ -90,8 +92,7 @@ function Setup({ onStart }: { onStart: (id: MysteryId, fatima: boolean) => void 
 }
 
 function SetupForm({ todayId, onStart }: { todayId: MysteryId; onStart: (id: MysteryId, fatima: boolean) => void }) {
-  const { state } = usePrayers();
-  void state;
+  const { play } = useAudio();
   return (
     <form className="mt-2" onSubmit={(e) => { e.preventDefault(); const f = new FormData(e.currentTarget); onStart(f.get("misterio") as MysteryId, f.get("fatima") === "on"); }}>
       <h1 className="text-2xl font-bold text-primary">Terço guiado</h1>
@@ -100,14 +101,14 @@ function SetupForm({ todayId, onStart }: { todayId: MysteryId; onStart: (id: Mys
         <legend className="sr-only">Mistérios</legend>
         {MYSTERY_SETS.map((set) => (
           <label key={set.id} className="flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-border bg-card p-4 has-[:checked]:border-gold has-[:checked]:bg-accent">
-            <input type="radio" name="misterio" value={set.id} defaultChecked={set.id === todayId} className="h-5 w-5 accent-[var(--primary)]" />
+            <input type="radio" name="misterio" value={set.id} defaultChecked={set.id === todayId} onChange={() => play("select")} className="h-5 w-5 accent-[var(--primary)]" />
             <span><span className="block font-display text-lg font-semibold text-primary">{set.title}{set.id === todayId && <span className="ml-2 rounded-full bg-gold px-2 py-0.5 text-xs text-gold-foreground">hoje</span>}</span>
               <span className="text-sm text-muted-foreground">{set.days}</span></span>
           </label>
         ))}
       </fieldset>
       <label className="mt-4 flex items-center gap-3 rounded-2xl border-2 border-border bg-card p-4">
-        <input type="checkbox" name="fatima" defaultChecked className="h-5 w-5 accent-[var(--primary)]" />
+        <input type="checkbox" name="fatima" defaultChecked onChange={() => play("select")} className="h-5 w-5 accent-[var(--primary)]" />
         <span className="font-bold text-foreground">Incluir a Oração de Fátima após cada dezena</span>
       </label>
       <LumenButton type="submit" className="mt-6">Começar o terço</LumenButton>

@@ -7,6 +7,7 @@ import { FavoriteButton } from "@/components/PrayerReader";
 import { PRAYERS } from "@/lib/prayers";
 import { getMysterySet, mysteriesForDay } from "@/lib/rosary";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/oracoes/")({
   head: () => ({
@@ -42,8 +43,8 @@ function Oracoes() {
         <h2 className="text-xl font-semibold text-primary">Orações tradicionais</h2>
         <div className="flex rounded-full border-2 border-border bg-card p-1 text-sm font-bold">
           {[["Todas", false], ["Favoritas", true]].map(([label, fav]) => (
-            <button key={String(label)} aria-pressed={onlyFav === fav} onClick={() => setOnlyFav(fav as boolean)}
-              className={cn("rounded-full px-3 py-1 transition", onlyFav === fav ? "bg-primary text-primary-foreground" : "text-muted-foreground")}>{label}</button>
+            <Button variant="ghost" key={String(label)} aria-pressed={onlyFav === fav} data-sound="select" onClick={() => setOnlyFav(fav as boolean)}
+              className={cn("h-auto rounded-full px-3 py-1 transition", onlyFav === fav ? "bg-primary text-primary-foreground" : "text-muted-foreground")}>{label}</Button>
           ))}
         </div>
       </div>

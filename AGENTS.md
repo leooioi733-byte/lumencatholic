@@ -15,3 +15,5 @@
 - Use a shared mascot-reaction component with fixed-size stages and CSS transform/opacity animation so feedback remains smooth without shifting the lesson layout.
 - Keep sourced prayer texts and rosary mysteries in typed data modules, with a pure sequence builder reused by the guided reader and tests, so traditional order stays consistent.
 - Keep prayer routes public and prayer-session state separate from learning progress; use session-scoped browser state for the guest prayer experience so no account or XP changes are needed.
+- Keep audio in a shared browser-only engine and provider; initialize after a user gesture, pause on hidden tabs, and persist only device sound preferences independently of profile and XP.
+- Mark selection buttons with data-sound="select" and play answer feedback only from the lesson verification handler so rerenders cannot replay effects.
