@@ -251,15 +251,14 @@ function Option({
   children: ReactNode;
 }) {
   return (
-    <button
+    <LumenButton
       type="button"
       onClick={onClick}
       aria-pressed={selected}
+      data-sound="select"
+      variant={selected ? "selectedAnswer" : "answer"}
       className={cn(
-        "btn-3d flex w-full items-center gap-3 border-2 px-4 py-3.5 text-left font-sans text-base font-bold",
-        selected
-          ? "border-gold bg-accent text-primary [--btn-depth:var(--gold-deep)]"
-          : "border-border bg-card text-foreground [--btn-depth:var(--border)]",
+        "justify-start gap-3 px-4 py-3.5 text-left font-sans text-base font-bold normal-case",
       )}
     >
       {multi && (
@@ -273,6 +272,6 @@ function Option({
         </span>
       )}
       <span className="min-w-0 flex-1">{children}</span>
-    </button>
+    </LumenButton>
   );
 }

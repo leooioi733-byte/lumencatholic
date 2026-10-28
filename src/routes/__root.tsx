@@ -13,6 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { PrayerProvider } from "@/components/PrayerProvider";
+import { AudioProvider } from "@/components/AudioProvider";
+import { AudioControls } from "@/components/AudioControls";
 
 function NotFoundComponent() {
   return (
@@ -127,7 +129,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <PrayerProvider><Outlet /></PrayerProvider>
+      <AudioProvider>
+        <AudioControls />
+        <div className="audio-page"><PrayerProvider><Outlet /></PrayerProvider></div>
+      </AudioProvider>
     </QueryClientProvider>
   );
 }

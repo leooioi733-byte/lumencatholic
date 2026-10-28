@@ -7,6 +7,7 @@ import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
 import { getLesson, lessonXp, type Lesson } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
+import { useAudio } from "@/components/AudioProvider";
 
 export const Route = createFileRoute("/licao/$id")({
   loader: ({ params }) => {
@@ -34,6 +35,7 @@ function Licao() {
 
 function LessonSession({ lesson }: { lesson: Lesson }) {
   const { complete } = useProgress();
+  const { play } = useAudio();
   const nT = lesson.teachings.length;
   const nQ = lesson.questions.length;
   const [step, setStep] = useState(0);
@@ -77,6 +79,7 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
   const check = () => {
     if (picked === null || checked || !q) return;
     setChecked(true);
+    play(correct ? "correct" : "incorrect");
     if (!correct) setMistakes((m) => m + 1);
   };
 
@@ -116,6 +119,7 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
                       disabled={checked}
                       onClick={() => setPicked(i)}
                       aria-pressed={picked === i}
+                      data-sound="select"
                       variant={state === "right" ? "rightAnswer" : state === "wrong" ? "wrongAnswer" : state === "sel" ? "selectedAnswer" : "answer"}
                       className="justify-start gap-3 px-4 text-left font-sans text-base font-bold normal-case disabled:opacity-100"
                     >

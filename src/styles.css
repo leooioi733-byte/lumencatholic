@@ -164,6 +164,9 @@
   h1, h2, h3 { font-family: var(--font-display); }
 }
 
+/* The shared sound bar reserves space instead of overlapping page controls. */
+.audio-page .min-h-dvh { min-height: calc(100dvh - 4rem); }
+
 @utility btn-3d {
   border-radius: 1rem;
   font-family: var(--font-display);

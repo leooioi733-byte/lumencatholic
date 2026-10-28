@@ -26,7 +26,7 @@ export function FavoriteButton({ prayer }: { prayer: Prayer }) {
   const { state, setState, ready } = usePrayers();
   const favorite = state.favorites.includes(prayer.id);
   return <LumenButton variant={favorite ? "gold" : "outline"} title={favorite ? "Remover dos favoritos" : "Marcar como favorita"}
-    aria-label={`${favorite ? "Remover dos favoritos" : "Favoritar"}: ${prayer.title}`} aria-pressed={favorite} disabled={!ready}
+    aria-label={`${favorite ? "Remover dos favoritos" : "Favoritar"}: ${prayer.title}`} aria-pressed={favorite} data-sound="select" disabled={!ready}
     onClick={() => setState((s) => ({ ...s, favorites: toggleFavorite(s.favorites, prayer.id) }))}
     className="h-11 w-11 shrink-0 p-0"><Star className={cn("h-5 w-5", favorite && "fill-current")} /></LumenButton>;
 }
