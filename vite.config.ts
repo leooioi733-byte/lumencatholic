@@ -33,7 +33,7 @@ export default defineConfig({
           cleanupOutdatedCaches: true,
           // Navigations go to the network first (never cache-first HTML), so an
           // update is visible on the next opening instead of after a reload.
-          navigateFallback: undefined,
+          navigateFallback: null,
           runtimeCaching: [
             {
               urlPattern: ({ request, url, sameOrigin }) =>
