@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Lumen architecture
-- Keep catechetical units in typed data modules and reuse the same catalog in lessons, the path and the library so titles, order and teaching sources stay consistent.
+- Keep catechetical units in typed data modules and reuse the same catalog in lessons, the path and the library; append new units without changing existing lesson IDs or order so teaching sources stay consistent and saved progress remains valid.
 - Render lesson sessions keyed by lesson ID so navigation to a different lesson resets answers, feedback and completion state.
 - Use a shared mascot-reaction component with fixed-size stages and CSS transform/opacity animation so feedback remains smooth without shifting the lesson layout.
 - Keep sourced prayer texts and rosary mysteries in typed data modules, with a pure sequence builder reused by the guided reader and tests, so traditional order stays consistent.

@@ -13,3 +13,5 @@
 - [x] Verificar navegação, favoritos, sequência do terço, celulares e regressões do aprendizado
 - [x] Adicionar música calma e efeitos de seleção, acerto e erro com opção de silenciar
 - [x] Conferir sons, controles e regressões em celular e computador
+- [x] Adicionar 12 lições em quatro novas unidades, com fontes bíblicas e do Catecismo
+- [x] Conferir conteúdo, trilha, biblioteca, conclusão com XP e preservação do progresso
