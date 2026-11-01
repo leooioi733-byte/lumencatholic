@@ -1,4 +1,5 @@
 import { ADDITIONAL_UNITS } from "./lesson-units";
+import { DEEPENING_UNITS } from "./lesson-deepening";
 import type { Lesson, LessonUnit } from "./lesson-types";
 export type { Teaching, Question, Lesson, LessonUnit } from "./lesson-types";
 
@@ -268,6 +269,7 @@ const FOUNDATION_LESSONS: Lesson[] = [
 export const UNITS: LessonUnit[] = [
   { id: "fundamentos", title: UNIT_TITLE, emoji: "📖", lessons: FOUNDATION_LESSONS },
   ...ADDITIONAL_UNITS,
+  ...DEEPENING_UNITS,
 ];
 export const LESSONS: Lesson[] = UNITS.flatMap((unit) => unit.lessons);
 
