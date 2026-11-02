@@ -16,3 +16,6 @@
 - [x] Adicionar 12 lições em quatro novas unidades, com fontes bíblicas e do Catecismo
 - [x] Conferir conteúdo, trilha, biblioteca, conclusão com XP e preservação do progresso
 - [x] Calendário litúrgico com santos e celebrações de cada dia
+- [ ] Museu Católico: reunir fotografias reais com créditos e explicações históricas com fontes
+- [ ] Museu Católico: integrar à Biblioteca, criar coleção com busca e categorias e páginas de cada imagem
+- [ ] Museu Católico: conferir navegação, imagens e leitura em celular e computador
