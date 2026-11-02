@@ -10,9 +10,9 @@ const TABS = [
   { to: "/perfil", label: "Perfil", icon: User },
 ] as const;
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   return (
-    <div className="mx-auto min-h-dvh max-w-md pb-24">
+    <div className={`mx-auto min-h-dvh pb-24 ${wide ? "max-w-4xl" : "max-w-md"}`}>
       <main className="animate-rise px-5 pt-6">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-border bg-card">
         <ul className="mx-auto grid max-w-md grid-cols-5">
