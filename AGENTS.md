@@ -17,3 +17,4 @@
 - Keep prayer routes public and prayer-session state separate from learning progress; use session-scoped browser state for the guest prayer experience so no account or XP changes are needed.
 - Keep audio in a shared browser-only engine and provider; initialize after a user gesture, pause on hidden tabs, and persist only device sound preferences independently of profile and XP.
 - Mark selection buttons with data-sound="select" and play answer feedback only from the lesson verification handler so rerenders cannot replay effects.
+- Keep the liturgical calendar as a pure data/computation module (fixed rows + Easter-based moveable feasts, Brazilian transfers) so the page and tests share it.

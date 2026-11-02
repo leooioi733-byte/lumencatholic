@@ -39,6 +39,11 @@ function Oracoes() {
         <p className="mt-1 text-sm opacity-90">Hoje: {today.title.toLowerCase()}</p>
       </Link>
 
+      <Link to="/calendario" className="btn-3d mt-4 flex items-center justify-between rounded-2xl border-2 border-border bg-card p-5 text-primary">
+        <span><span className="block text-xs font-bold uppercase tracking-wide text-muted-foreground">Calendário litúrgico</span><span className="font-display text-xl font-semibold">Santos de cada dia</span></span>
+        <ChevronRight className="h-5 w-5 text-muted-foreground" />
+      </Link>
+
       <div className="mt-8 flex items-center justify-between gap-2">
         <h2 className="text-xl font-semibold text-primary">Orações tradicionais</h2>
         <div className="flex rounded-full border-2 border-border bg-card p-1 text-sm font-bold">

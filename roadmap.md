@@ -15,3 +15,4 @@
 - [x] Conferir sons, controles e regressões em celular e computador
 - [x] Adicionar 12 lições em quatro novas unidades, com fontes bíblicas e do Catecismo
 - [x] Conferir conteúdo, trilha, biblioteca, conclusão com XP e preservação do progresso
+- [x] Calendário litúrgico com santos e celebrações de cada dia
