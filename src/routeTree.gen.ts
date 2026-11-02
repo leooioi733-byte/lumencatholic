@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BibliotecaRouteImport } from './routes/biblioteca'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as CalendarioRouteImport } from './routes/calendario'
 import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as TrilhaRouteImport } from './routes/trilha'
@@ -33,6 +34,11 @@ const BibliotecaRoute = BibliotecaRouteImport.update({
 const CadastroRoute = CadastroRouteImport.update({
   id: '/cadastro',
   path: '/cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarioRoute = CalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InicioRoute = InicioRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/calendario': typeof CalendarioRoute
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/calendario': typeof CalendarioRoute
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/biblioteca': typeof BibliotecaRoute
   '/cadastro': typeof CadastroRoute
+  '/calendario': typeof CalendarioRoute
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/biblioteca'
     | '/cadastro'
+    | '/calendario'
     | '/inicio'
     | '/perfil'
     | '/trilha'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/biblioteca'
     | '/cadastro'
+    | '/calendario'
     | '/inicio'
     | '/perfil'
     | '/trilha'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/biblioteca'
     | '/cadastro'
+    | '/calendario'
     | '/inicio'
     | '/perfil'
     | '/trilha'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BibliotecaRoute: typeof BibliotecaRoute
   CadastroRoute: typeof CadastroRoute
+  CalendarioRoute: typeof CalendarioRoute
   InicioRoute: typeof InicioRoute
   PerfilRoute: typeof PerfilRoute
   TrilhaRoute: typeof TrilhaRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/cadastro'
       fullPath: '/cadastro'
       preLoaderRoute: typeof CadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendario': {
+      id: '/calendario'
+      path: '/calendario'
+      fullPath: '/calendario'
+      preLoaderRoute: typeof CalendarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inicio': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BibliotecaRoute: BibliotecaRoute,
   CadastroRoute: CadastroRoute,
+  CalendarioRoute: CalendarioRoute,
   InicioRoute: InicioRoute,
   PerfilRoute: PerfilRoute,
   TrilhaRoute: TrilhaRoute,
