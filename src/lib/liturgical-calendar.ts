@@ -117,10 +117,10 @@ export function moveable(year: number): Record<string, Celebration> {
   set(add(e, 68), "Sagrado Coração de Jesus", S);
   set(add(e, 69), "Imaculado Coração de Maria", M);
   const sundayBetween = (m: number, from: number) => { const d = utc(year, m, from); return add(d, (7 - d.getUTCDay()) % 7); };
-  set(sundayBetween(5, 28), "São Pedro e São Paulo, apóstolos", S);
+  set(sundayBetween(5, 29), "São Pedro e São Paulo, apóstolos", S);
   const aug15 = utc(year, 7, 15);
   if (aug15.getUTCDay() !== 0) set(add(aug15, 7 - aug15.getUTCDay()), "Assunção de Nossa Senhora", S);
-  set(sundayBetween(10, 2), "Todos os Santos", S);
+  set(sundayBetween(10, 1), "Todos os Santos", S);
   set(add(firstAdvent(year), -7), "Nosso Senhor Jesus Cristo, Rei do Universo", S);
   const xmas = utc(year, 11, 25);
   set(xmas.getUTCDay() === 0 ? utc(year, 11, 30) : add(xmas, 7 - xmas.getUTCDay()), "Sagrada Família de Jesus, Maria e José", F);
