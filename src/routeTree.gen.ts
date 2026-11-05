@@ -17,6 +17,8 @@ import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as TrilhaRouteImport } from './routes/trilha'
 import { Route as LicaoIdRouteImport } from './routes/licao.$id'
+import { Route as MuseuIndexRouteImport } from './routes/museu.index'
+import { Route as MuseuIdRouteImport } from './routes/museu.$id'
 import { Route as OracoesIndexRouteImport } from './routes/oracoes.index'
 import { Route as OracoesIdRouteImport } from './routes/oracoes.$id'
 import { Route as OracoesTercoRouteImport } from './routes/oracoes.terco'
@@ -61,6 +63,16 @@ const LicaoIdRoute = LicaoIdRouteImport.update({
   path: '/licao/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MuseuIndexRoute = MuseuIndexRouteImport.update({
+  id: '/museu/',
+  path: '/museu/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MuseuIdRoute = MuseuIdRouteImport.update({
+  id: '/museu/$id',
+  path: '/museu/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OracoesIndexRoute = OracoesIndexRouteImport.update({
   id: '/oracoes/',
   path: '/oracoes/',
@@ -86,8 +98,10 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/museu/': typeof MuseuIndexRoute
   '/oracoes/': typeof OracoesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -99,8 +113,10 @@ export interface FileRoutesByTo {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/museu': typeof MuseuIndexRoute
   '/oracoes': typeof OracoesIndexRoute
 }
 export interface FileRoutesById {
@@ -113,8 +129,10 @@ export interface FileRoutesById {
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
   '/licao/$id': typeof LicaoIdRoute
+  '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/museu/': typeof MuseuIndexRoute
   '/oracoes/': typeof OracoesIndexRoute
 }
 export interface FileRouteTypes {
@@ -128,8 +146,10 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/museu/'
     | '/oracoes/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -141,8 +161,10 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/museu'
     | '/oracoes'
   id:
     | '__root__'
@@ -154,8 +176,10 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/trilha'
     | '/licao/$id'
+    | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/museu/'
     | '/oracoes/'
   fileRoutesById: FileRoutesById
 }
@@ -168,8 +192,10 @@ export interface RootRouteChildren {
   PerfilRoute: typeof PerfilRoute
   TrilhaRoute: typeof TrilhaRoute
   LicaoIdRoute: typeof LicaoIdRoute
+  MuseuIdRoute: typeof MuseuIdRoute
   OracoesIdRoute: typeof OracoesIdRoute
   OracoesTercoRoute: typeof OracoesTercoRoute
+  MuseuIndexRoute: typeof MuseuIndexRoute
   OracoesIndexRoute: typeof OracoesIndexRoute
 }
 
@@ -231,6 +257,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LicaoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/museu/': {
+      id: '/museu/'
+      path: '/museu'
+      fullPath: '/museu/'
+      preLoaderRoute: typeof MuseuIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/museu/$id': {
+      id: '/museu/$id'
+      path: '/museu/$id'
+      fullPath: '/museu/$id'
+      preLoaderRoute: typeof MuseuIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/oracoes/': {
       id: '/oracoes/'
       path: '/oracoes'
@@ -264,8 +304,10 @@ const rootRouteChildren: RootRouteChildren = {
   PerfilRoute: PerfilRoute,
   TrilhaRoute: TrilhaRoute,
   LicaoIdRoute: LicaoIdRoute,
+  MuseuIdRoute: MuseuIdRoute,
   OracoesIdRoute: OracoesIdRoute,
   OracoesTercoRoute: OracoesTercoRoute,
+  MuseuIndexRoute: MuseuIndexRoute,
   OracoesIndexRoute: OracoesIndexRoute,
 }
 export const routeTree = rootRouteImport
