@@ -16,12 +16,15 @@ import { Route as CalendarioRouteImport } from './routes/calendario'
 import { Route as InicioRouteImport } from './routes/inicio'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as TrilhaRouteImport } from './routes/trilha'
+import { Route as BibliaIndexRouteImport } from './routes/biblia.index'
+import { Route as BibliaLivroRouteImport } from './routes/biblia.$livro'
 import { Route as LicaoIdRouteImport } from './routes/licao.$id'
 import { Route as MuseuIndexRouteImport } from './routes/museu.index'
 import { Route as MuseuIdRouteImport } from './routes/museu.$id'
 import { Route as OracoesIndexRouteImport } from './routes/oracoes.index'
 import { Route as OracoesIdRouteImport } from './routes/oracoes.$id'
 import { Route as OracoesTercoRouteImport } from './routes/oracoes.terco'
+import { Route as BibliaLivroCapRouteImport } from './routes/biblia.$livro_.$cap'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +61,16 @@ const TrilhaRoute = TrilhaRouteImport.update({
   path: '/trilha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliaIndexRoute = BibliaIndexRouteImport.update({
+  id: '/biblia/',
+  path: '/biblia/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliaLivroRoute = BibliaLivroRouteImport.update({
+  id: '/biblia/$livro',
+  path: '/biblia/$livro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LicaoIdRoute = LicaoIdRouteImport.update({
   id: '/licao/$id',
   path: '/licao/$id',
@@ -88,6 +101,11 @@ const OracoesTercoRoute = OracoesTercoRouteImport.update({
   path: '/oracoes/terco',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliaLivroCapRoute = BibliaLivroCapRouteImport.update({
+  id: '/biblia/$livro_/$cap',
+  path: '/biblia/$livro/$cap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -97,12 +115,15 @@ export interface FileRoutesByFullPath {
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
+  '/biblia/$livro': typeof BibliaLivroRoute
   '/licao/$id': typeof LicaoIdRoute
   '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/biblia/': typeof BibliaIndexRoute
   '/museu/': typeof MuseuIndexRoute
   '/oracoes/': typeof OracoesIndexRoute
+  '/biblia/$livro/$cap': typeof BibliaLivroCapRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -112,12 +133,15 @@ export interface FileRoutesByTo {
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
+  '/biblia/$livro': typeof BibliaLivroRoute
   '/licao/$id': typeof LicaoIdRoute
   '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/biblia': typeof BibliaIndexRoute
   '/museu': typeof MuseuIndexRoute
   '/oracoes': typeof OracoesIndexRoute
+  '/biblia/$livro/$cap': typeof BibliaLivroCapRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,12 +152,15 @@ export interface FileRoutesById {
   '/inicio': typeof InicioRoute
   '/perfil': typeof PerfilRoute
   '/trilha': typeof TrilhaRoute
+  '/biblia/$livro': typeof BibliaLivroRoute
   '/licao/$id': typeof LicaoIdRoute
   '/museu/$id': typeof MuseuIdRoute
   '/oracoes/$id': typeof OracoesIdRoute
   '/oracoes/terco': typeof OracoesTercoRoute
+  '/biblia/': typeof BibliaIndexRoute
   '/museu/': typeof MuseuIndexRoute
   '/oracoes/': typeof OracoesIndexRoute
+  '/biblia/$livro_/$cap': typeof BibliaLivroCapRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -145,12 +172,15 @@ export interface FileRouteTypes {
     | '/inicio'
     | '/perfil'
     | '/trilha'
+    | '/biblia/$livro'
     | '/licao/$id'
     | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/biblia/'
     | '/museu/'
     | '/oracoes/'
+    | '/biblia/$livro/$cap'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -160,12 +190,15 @@ export interface FileRouteTypes {
     | '/inicio'
     | '/perfil'
     | '/trilha'
+    | '/biblia/$livro'
     | '/licao/$id'
     | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/biblia'
     | '/museu'
     | '/oracoes'
+    | '/biblia/$livro/$cap'
   id:
     | '__root__'
     | '/'
@@ -175,12 +208,15 @@ export interface FileRouteTypes {
     | '/inicio'
     | '/perfil'
     | '/trilha'
+    | '/biblia/$livro'
     | '/licao/$id'
     | '/museu/$id'
     | '/oracoes/$id'
     | '/oracoes/terco'
+    | '/biblia/'
     | '/museu/'
     | '/oracoes/'
+    | '/biblia/$livro_/$cap'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,12 +227,15 @@ export interface RootRouteChildren {
   InicioRoute: typeof InicioRoute
   PerfilRoute: typeof PerfilRoute
   TrilhaRoute: typeof TrilhaRoute
+  BibliaLivroRoute: typeof BibliaLivroRoute
   LicaoIdRoute: typeof LicaoIdRoute
   MuseuIdRoute: typeof MuseuIdRoute
   OracoesIdRoute: typeof OracoesIdRoute
   OracoesTercoRoute: typeof OracoesTercoRoute
+  BibliaIndexRoute: typeof BibliaIndexRoute
   MuseuIndexRoute: typeof MuseuIndexRoute
   OracoesIndexRoute: typeof OracoesIndexRoute
+  BibliaLivroCapRoute: typeof BibliaLivroCapRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -250,6 +289,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrilhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblia/': {
+      id: '/biblia/'
+      path: '/biblia'
+      fullPath: '/biblia/'
+      preLoaderRoute: typeof BibliaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblia/$livro': {
+      id: '/biblia/$livro'
+      path: '/biblia/$livro'
+      fullPath: '/biblia/$livro'
+      preLoaderRoute: typeof BibliaLivroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/licao/$id': {
       id: '/licao/$id'
       path: '/licao/$id'
@@ -292,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OracoesTercoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblia/$livro_/$cap': {
+      id: '/biblia/$livro_/$cap'
+      path: '/biblia/$livro/$cap'
+      fullPath: '/biblia/$livro/$cap'
+      preLoaderRoute: typeof BibliaLivroCapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -303,12 +363,15 @@ const rootRouteChildren: RootRouteChildren = {
   InicioRoute: InicioRoute,
   PerfilRoute: PerfilRoute,
   TrilhaRoute: TrilhaRoute,
+  BibliaLivroRoute: BibliaLivroRoute,
   LicaoIdRoute: LicaoIdRoute,
   MuseuIdRoute: MuseuIdRoute,
   OracoesIdRoute: OracoesIdRoute,
   OracoesTercoRoute: OracoesTercoRoute,
+  BibliaIndexRoute: BibliaIndexRoute,
   MuseuIndexRoute: MuseuIndexRoute,
   OracoesIndexRoute: OracoesIndexRoute,
+  BibliaLivroCapRoute: BibliaLivroCapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
