@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Landmark } from "lucide-react";
+import { BookOpen, Landmark } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { UNITS } from "@/lib/lessons";
 
@@ -22,7 +22,12 @@ function Biblioteca() {
     <AppShell>
       <h1 className="text-2xl font-bold text-primary">Biblioteca</h1>
       <p className="mt-1 text-muted-foreground">Os ensinamentos, com suas fontes.</p>
-      <Link to="/museu" className="mt-4 flex items-center gap-3 rounded-2xl border-2 border-gold bg-card p-4 transition active:scale-[0.98]">
+      <Link to="/biblia" className="mt-4 flex items-center gap-3 rounded-2xl border-2 border-gold bg-card p-4 transition active:scale-[0.98]">
+        <BookOpen className="h-8 w-8 text-primary" aria-hidden="true" />
+        <span><span className="block font-display text-lg font-semibold text-primary">Bíblia Sagrada</span>
+        <span className="text-sm text-muted-foreground">Os 73 livros completos, do Gênesis ao Apocalipse</span></span>
+      </Link>
+      <Link to="/museu" className="mt-3 flex items-center gap-3 rounded-2xl border-2 border-gold bg-card p-4 transition active:scale-[0.98]">
         <Landmark className="h-8 w-8 text-primary" aria-hidden="true" />
         <span><span className="block font-display text-lg font-semibold text-primary">Museu Católico</span>
         <span className="text-sm text-muted-foreground">Fotos históricas com explicações e fontes</span></span>
