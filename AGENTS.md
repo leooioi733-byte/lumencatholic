@@ -19,3 +19,4 @@
 - Mark selection buttons with data-sound="select" and play answer feedback only from the lesson verification handler so rerenders cannot replay effects.
 - Keep the liturgical calendar as a pure data/computation module (fixed rows + Easter-based moveable feasts, Brazilian transfers) so the page and tests share it.
 - Keep museum exhibits in a typed, sourced catalog shared by the gallery and detail pages; store real photo asset pointers with attribution and distinguish historical events, devotional tradition and what each image actually depicts.
+- Serve the full Bible as per-book static JSON in public/biblia/ with a typed index in src/lib/bible-books.ts, fetched on demand so the 73 books never enter the JS bundle.
