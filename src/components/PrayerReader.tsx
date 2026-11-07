@@ -4,19 +4,19 @@ import { usePrayers } from "@/components/PrayerProvider";
 import { toggleFavorite } from "@/lib/prayer-state";
 import type { Prayer } from "@/lib/prayer-types";
 import { cn } from "@/lib/utils";
-
-const TEXT_SIZES = ["text-lg", "text-xl", "text-2xl", "text-[28px]", "text-[32px]"];
+import { useSettings } from "@/components/SettingsProvider";
+import { READING_SIZE_CLASSES } from "@/lib/settings";
 
 export function TextSizeControls() {
-  const { state, setState, ready } = usePrayers();
+  const { settings, updateSettings, ready } = useSettings();
   return (
     <div role="group" aria-label="Tamanho do texto" className="flex items-center gap-2">
-      <LumenButton variant="outline" title="Diminuir texto" aria-label="Diminuir texto" disabled={!ready || state.textSize === 0}
-        onClick={() => setState((s) => ({ ...s, textSize: Math.max(0, s.textSize - 1) }))}
+      <LumenButton variant="outline" title="Diminuir texto" aria-label="Diminuir texto" disabled={!ready || settings.textSize === 0}
+        onClick={() => updateSettings({ textSize: settings.textSize - 1 })}
         className="h-11 w-11 shrink-0 p-0"><Minus className="h-4 w-4" /></LumenButton>
       <span aria-hidden="true" className="font-display text-lg text-primary">Aa</span>
-      <LumenButton variant="outline" title="Aumentar texto" aria-label="Aumentar texto" disabled={!ready || state.textSize === 4}
-        onClick={() => setState((s) => ({ ...s, textSize: Math.min(4, s.textSize + 1) }))}
+      <LumenButton variant="outline" title="Aumentar texto" aria-label="Aumentar texto" disabled={!ready || settings.textSize === 4}
+        onClick={() => updateSettings({ textSize: settings.textSize + 1 })}
         className="h-11 w-11 shrink-0 p-0"><Plus className="h-4 w-4" /></LumenButton>
     </div>
   );
@@ -32,8 +32,8 @@ export function FavoriteButton({ prayer }: { prayer: Prayer }) {
 }
 
 export function PrayerText({ text }: { text: string }) {
-  const { state } = usePrayers();
-  return <div className={cn("prayer-text space-y-5 font-sans leading-[1.8] text-foreground", TEXT_SIZES[state.textSize])}>
+  const { settings } = useSettings();
+  return <div className={cn("prayer-text space-y-5 font-sans leading-[1.8] text-foreground", READING_SIZE_CLASSES[settings.textSize])}>
     {text.split("\n\n").map((paragraph, index) => <p key={index} className="whitespace-pre-line break-words">{paragraph}</p>)}
   </div>;
 }

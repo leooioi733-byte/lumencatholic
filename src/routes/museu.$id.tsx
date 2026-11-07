@@ -19,7 +19,15 @@ export const Route = createFileRoute("/museu/$id")({
           { property: "og:type", content: "article" },
           { name: "twitter:card", content: "summary" },
         ]
-      : [{ title: "Peça não encontrada — Museu Católico" }, { name: "robots", content: "noindex" }],
+      : [
+          { title: "Exposição indisponível — Museu Católico — Lumen" },
+          { name: "description", content: "Esta exposição do Museu Católico não está disponível." },
+          { property: "og:title", content: "Exposição indisponível — Museu Católico — Lumen" },
+          { property: "og:description", content: "Esta exposição do Museu Católico não está disponível." },
+          { property: "og:type", content: "article" },
+          { name: "twitter:card", content: "summary" },
+          { name: "robots", content: "noindex" },
+        ],
   }),
   notFoundComponent: () => (
     <AppShell><p className="text-muted-foreground">Peça não encontrada.</p><Link to="/museu" className="font-bold text-primary">Voltar ao museu</Link></AppShell>

@@ -20,3 +20,4 @@
 - Keep the liturgical calendar as a pure data/computation module (fixed rows + Easter-based moveable feasts, Brazilian transfers) so the page and tests share it.
 - Keep museum exhibits in a typed, sourced catalog shared by the gallery and detail pages; store real photo asset pointers with attribution and distinguish historical events, devotional tradition and what each image actually depicts.
 - Serve the full Bible as per-book static JSON in public/biblia/ with a typed index in src/lib/bible-books.ts, fetched on demand so the 73 books never enter the JS bundle.
+- Keep appearance, reading size and motion in a shared device-settings provider, independent of accounts, prayer sessions and XP; apply appearance through semantic CSS tokens and reuse reading controls across Bible and prayers so preferences stay consistent without changing progress.

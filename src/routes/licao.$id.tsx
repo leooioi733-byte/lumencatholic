@@ -18,9 +18,9 @@ export const Route = createFileRoute("/licao/$id")({
   head: ({ loaderData }) => ({
     meta: [
       { title: `${loaderData?.title ?? "Lição"} — Lumen` },
-      { name: "description", content: "Lição curta com ensinamento e perguntas." },
+      { name: "description", content: loaderData ? `Aprenda sobre ${loaderData.title} com ensinamentos da Bíblia e do Catecismo e perguntas interativas.` : "Lições da fé católica no Lumen." },
       { property: "og:title", content: `${loaderData?.title ?? "Lição"} — Lumen` },
-      { property: "og:description", content: "Lição curta com ensinamento e perguntas." },
+      { property: "og:description", content: loaderData ? `Aprenda sobre ${loaderData.title} com ensinamentos da Bíblia e do Catecismo e perguntas interativas.` : "Lições da fé católica no Lumen." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],

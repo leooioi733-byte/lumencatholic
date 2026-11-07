@@ -1,7 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
+import { TextSizeControls } from "@/components/PrayerReader";
+import { useSettings } from "@/components/SettingsProvider";
+import { READING_SIZE_CLASSES } from "@/lib/settings";
+import { cn } from "@/lib/utils";
 import { getBook } from "@/lib/bible-books";
 
 type Chapters = Record<string, [number, string][]>;
@@ -28,10 +31,11 @@ function Capitulo() {
   const { book, cap } = Route.useLoaderData();
   const [data, setData] = useState<Chapters | null>(cache.get(book.slug) ?? null);
   const [error, setError] = useState(false);
-  const [size, setSize] = useState(18);
+  const { settings } = useSettings();
 
   useEffect(() => {
-    if (cache.has(book.slug)) { setData(cache.get(book.slug)!); return; }
+    const cached = cache.get(book.slug);
+    if (cached) { setData(cached); return; }
     setData(null); setError(false);
     fetch(`/biblia/${book.slug}.json`).then((r) => { if (!r.ok) throw new Error(); return r.json(); })
       .then((j: Chapters) => { cache.set(book.slug, j); setData(j); })
@@ -45,14 +49,11 @@ function Capitulo() {
   return (
     <AppShell>
       <Link to="/biblia/$livro" params={{ livro: book.slug }} className="text-sm font-bold text-muted-foreground">← {book.name}</Link>
-      <div className="mt-2 flex items-center justify-between gap-2">
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-primary">{book.name} {cap}</h1>
-        <div className="flex gap-1">
-          <button type="button" aria-label="Diminuir texto" onClick={() => setSize((s) => Math.max(14, s - 2))} className="rounded-xl border-2 border-border bg-card p-2 text-primary"><Minus className="h-4 w-4" /></button>
-          <button type="button" aria-label="Aumentar texto" onClick={() => setSize((s) => Math.min(30, s + 2))} className="rounded-xl border-2 border-border bg-card p-2 text-primary"><Plus className="h-4 w-4" /></button>
-        </div>
+        <TextSizeControls />
       </div>
-      <article className="mt-4 rounded-2xl border-2 border-border bg-card p-5 leading-relaxed text-foreground" style={{ fontSize: size }}>
+      <article className={cn("mt-4 break-words rounded-2xl border-2 border-border bg-card p-5 leading-relaxed text-foreground", READING_SIZE_CLASSES[settings.textSize])}>
         {error ? <p>Não foi possível carregar este capítulo. Verifique a conexão e tente novamente.</p>
           : !data ? <p className="text-muted-foreground">Carregando…</p>
           : verses.map(([v, t]) => (
