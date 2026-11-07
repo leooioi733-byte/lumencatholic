@@ -14,7 +14,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { PrayerProvider } from "@/components/PrayerProvider";
 import { AudioProvider } from "@/components/AudioProvider";
-import { AudioControls } from "@/components/AudioControls";
+import { AppSettings } from "@/components/AppSettings";
+import { SettingsProvider } from "@/components/SettingsProvider";
 import { registerLumenServiceWorker } from "@/lib/pwa-register";
 
 function NotFoundComponent() {
@@ -135,10 +136,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <AudioProvider>
-        <AudioControls />
-        <div className="audio-page"><PrayerProvider><Outlet /></PrayerProvider></div>
-      </AudioProvider>
+      <SettingsProvider>
+        <AudioProvider>
+          <AppSettings />
+          <div className="audio-page"><PrayerProvider><Outlet /></PrayerProvider></div>
+        </AudioProvider>
+      </SettingsProvider>
     </QueryClientProvider>
   );
 }
