@@ -22,10 +22,10 @@ export function parseAppSettings(raw: string | null): AppSettings {
     if (!data || typeof data !== "object" || Array.isArray(data)) return { ...DEFAULT_APP_SETTINGS };
     const value = data as Record<string, unknown>;
     return {
-      appearance: value.appearance === "burgundy" ? "burgundy" : "cream",
-      textSize: typeof value.textSize === "number" && Number.isInteger(value.textSize)
-        ? Math.max(0, Math.min(4, value.textSize)) : 0,
-      reduceMotion: value.reduceMotion === true,
+      appearance: value['appearance'] === "burgundy" ? "burgundy" : "cream",
+      textSize: typeof value['textSize'] === "number" && Number.isInteger(value['textSize'])
+        ? Math.max(0, Math.min(4, value['textSize'])) : 0,
+      reduceMotion: value['reduceMotion'] === true,
     };
   } catch {
     return { ...DEFAULT_APP_SETTINGS };

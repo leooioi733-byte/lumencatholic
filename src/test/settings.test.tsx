@@ -20,26 +20,26 @@ describe("preferências do aparelho", () => {
   beforeEach(() => localStorage.clear());
   afterEach(() => {
     cleanup();
-    delete document.documentElement.dataset.lumenTheme;
-    delete document.documentElement.dataset.reduceMotion;
+    delete document.documentElement.dataset['lumenTheme'];
+    delete document.documentElement.dataset['reduceMotion'];
   });
 
   it("começa predominantemente creme", () => {
     expect(parseAppSettings(null).appearance).toBe("cream");
     render(<App />);
-    expect(document.documentElement.dataset.lumenTheme).toBe("cream");
+    expect(document.documentElement.dataset['lumenTheme']).toBe("cream");
   });
 
   it("alterna entre creme e grená e lembra a escolha ao reabrir", () => {
     const view = render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Grená" }));
-    expect(document.documentElement.dataset.lumenTheme).toBe("burgundy");
+    expect(document.documentElement.dataset['lumenTheme']).toBe("burgundy");
     expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("burgundy");
     view.unmount();
     render(<App />);
-    expect(document.documentElement.dataset.lumenTheme).toBe("burgundy");
+    expect(document.documentElement.dataset['lumenTheme']).toBe("burgundy");
     fireEvent.click(screen.getByRole("button", { name: "Creme" }));
-    expect(document.documentElement.dataset.lumenTheme).toBe("cream");
+    expect(document.documentElement.dataset['lumenTheme']).toBe("cream");
   });
 
   it("não aceita uma terceira aparência ou preferências inválidas", () => {
@@ -61,7 +61,7 @@ describe("preferências do aparelho", () => {
     const view = render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "Letra" }));
     fireEvent.click(screen.getByRole("button", { name: "Movimento" }));
-    expect(document.documentElement.dataset.reduceMotion).toBe("true");
+    expect(document.documentElement.dataset['reduceMotion']).toBe("true");
     view.unmount();
     render(<App />);
     expect(JSON.parse(screen.getByTestId("settings").textContent ?? "{}")).toEqual({ appearance: "cream", textSize: 3, reduceMotion: true });

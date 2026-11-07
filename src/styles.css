@@ -327,6 +327,12 @@
 .confetti-three { left: 18%; top: 0; animation-delay: .55s; }
 .confetti-four { right: 20%; top: 0; animation-delay: .75s; }
 @media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
   .animate-float-soft, .animate-halo, .animate-rise,
   .mascot-stage *, .mascot-stage *::before, .mascot-stage *::after { animation: none; }
   .mascot-sparks { display: none; }

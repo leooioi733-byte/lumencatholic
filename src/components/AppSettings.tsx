@@ -66,9 +66,9 @@ export function AppSettings() {
 
         <section className="mt-3 border-t border-border pt-4" aria-labelledby="reading-title">
           <h2 id="reading-title" className="mb-3 text-sm font-semibold text-muted-foreground">Leitura e movimento</h2>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="flex items-center gap-3 font-bold"><Type aria-hidden="true" className="h-5 w-5 text-primary" />Tamanho da letra</span>
-            <div role="group" aria-label="Tamanho da letra" className="flex shrink-0 items-center gap-2">
+            <div role="group" aria-label="Tamanho da letra" className="ml-auto flex shrink-0 items-center gap-2">
               <LumenButton variant="outline" aria-label="Diminuir letra" title="Diminuir letra" disabled={!ready || settings.textSize === 0}
                 onClick={() => updateSettings({ textSize: settings.textSize - 1 })} className="h-10 w-10 p-0"><Minus className="h-4 w-4" /></LumenButton>
               <output className="w-6 text-center text-sm font-bold" aria-live="polite">{READING_SIZE_LABELS[settings.textSize]}</output>

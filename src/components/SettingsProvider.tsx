@@ -35,8 +35,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    document.documentElement.dataset.lumenTheme = settings.appearance;
-    document.documentElement.dataset.reduceMotion = String(settings.reduceMotion);
+    document.documentElement.dataset['lumenTheme'] = settings.appearance;
+    document.documentElement.dataset['reduceMotion'] = String(settings.reduceMotion);
   }, [settings.appearance, settings.reduceMotion]);
 
   const updateSettings = useCallback((patch: Partial<AppSettings>) => {
