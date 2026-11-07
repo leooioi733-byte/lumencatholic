@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Pause, Play } from "lucide-react";
 import { useMemo } from "react";
 import { AppShell, ProgressBar } from "@/components/AppShell";
-import { MascotReaction } from "@/components/MascotReaction";
 import { usePrayers } from "@/components/PrayerProvider";
 import { PrayerText, TextSizeControls } from "@/components/PrayerReader";
 import { LumenButton } from "@/components/ui/lumen-button";
@@ -40,8 +39,7 @@ function Terco() {
   if (session.completed) return (
     <AppShell>{back}
       <div className="mt-6 flex flex-col items-center text-center">
-        <MascotReaction mood="celebrate" className="w-36" />
-        <h1 className="mt-4 text-2xl font-bold text-primary">Terço concluído</h1>
+        <h1 className="text-2xl font-bold text-primary">Terço concluído</h1>
         <p className="mt-2 text-muted-foreground">Que Nossa Senhora interceda por você.</p>
         <LumenButton className="mt-6" onClick={exit}>Rezar outro terço</LumenButton>
       </div>

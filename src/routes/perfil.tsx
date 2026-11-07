@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import mascote from "@/assets/lumen-mascote.png";
 import { AppShell } from "@/components/AppShell";
 import { LESSONS } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
@@ -23,8 +22,7 @@ function Perfil() {
   return (
     <AppShell>
       <div className="flex flex-col items-center text-center">
-        <img src={mascote} alt="" className="w-28" />
-        <h1 className="mt-3 text-2xl font-bold text-primary">{profile?.nickname || "Visitante"}</h1>
+        <h1 className="text-2xl font-bold text-primary">{profile?.nickname || "Visitante"}</h1>
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3">
         <div className="rounded-2xl border-2 border-border bg-card p-4 text-center">

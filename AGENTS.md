@@ -12,7 +12,7 @@
 ## Lumen architecture
 - Keep catechetical units in typed data modules and reuse the same catalog in lessons, the path and the library; append new units without changing existing lesson IDs or order so teaching sources stay consistent and saved progress remains valid.
 - Render lesson sessions keyed by lesson ID so navigation to a different lesson resets answers, feedback and completion state.
-- Use a shared mascot-reaction component with fixed-size stages and CSS transform/opacity animation so feedback remains smooth without shifting the lesson layout.
+- Keep lesson answer feedback and completion independent of decorative imagery so presentation changes never affect answers, audio or XP.
 - Keep sourced prayer texts and rosary mysteries in typed data modules, with a pure sequence builder reused by the guided reader and tests, so traditional order stays consistent.
 - Keep prayer routes public and prayer-session state separate from learning progress; use session-scoped browser state for the guest prayer experience so no account or XP changes are needed.
 - Keep audio in a shared browser-only engine and provider; initialize after a user gesture, pause on hidden tabs, and persist only device sound preferences independently of profile and XP.

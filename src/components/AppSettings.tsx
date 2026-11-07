@@ -37,10 +37,10 @@ export function AppSettings() {
         <section className="mt-5" aria-labelledby="appearance-title">
           <h2 id="appearance-title" className="mb-3 text-sm font-semibold text-muted-foreground">Aparência</h2>
           <div role="group" aria-label="Aparência" className="grid grid-cols-2 gap-3">
-            {([{ value: "cream", label: "Creme" }, { value: "burgundy", label: "Grená" }] as const).map(({ value, label }) => (
+            {([{ value: "cream", label: "Creme" }, { value: "burgundy", label: "Grená" }, { value: "black-yellow", label: "Preto e amarelo" }] as const).map(({ value, label }) => (
               <LumenButton key={value} variant="outline" data-sound="select" aria-pressed={settings.appearance === value}
                 disabled={!ready} onClick={() => updateSettings({ appearance: value })}
-                className={cn("h-auto flex-col gap-3 px-3 py-3 text-base normal-case", settings.appearance === value && "border-gold")}>
+                className={cn("h-auto flex-col gap-3 px-3 py-3 text-base normal-case", value === "black-yellow" && "col-span-2", settings.appearance === value && "border-gold")}>
                 <span aria-hidden="true" className={cn("theme-preview", `theme-preview-${value}`)}>
                   <span className="theme-preview-heading" />
                   <span className="theme-preview-card"><span /><span /></span>

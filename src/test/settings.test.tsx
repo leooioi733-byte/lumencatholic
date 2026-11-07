@@ -10,6 +10,7 @@ function Preferences() {
     <output data-testid="settings">{JSON.stringify(settings)}</output>
     <LumenButton onClick={() => updateSettings({ appearance: "burgundy" })}>Grená</LumenButton>
     <LumenButton onClick={() => updateSettings({ appearance: "cream" })}>Creme</LumenButton>
+    <LumenButton onClick={() => updateSettings({ appearance: "black-yellow" })}>Preto e amarelo</LumenButton>
     <LumenButton onClick={() => updateSettings({ textSize: 3 })}>Letra</LumenButton>
     <LumenButton onClick={() => updateSettings({ reduceMotion: true })}>Movimento</LumenButton>
   </>;
@@ -42,7 +43,21 @@ describe("preferências do aparelho", () => {
     expect(document.documentElement.dataset['lumenTheme']).toBe("cream");
   });
 
-  it("não aceita uma terceira aparência ou preferências inválidas", () => {
+  it("alterna para preto e amarelo e lembra a escolha ao reabrir", () => {
+    const view = render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "Preto e amarelo" }));
+    expect(document.documentElement.dataset['lumenTheme']).toBe("black-yellow");
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("black-yellow");
+    view.unmount();
+    render(<App />);
+    expect(document.documentElement.dataset['lumenTheme']).toBe("black-yellow");
+    fireEvent.click(screen.getByRole("button", { name: "Grená" }));
+    expect(document.documentElement.dataset['lumenTheme']).toBe("burgundy");
+    fireEvent.click(screen.getByRole("button", { name: "Creme" }));
+    expect(document.documentElement.dataset['lumenTheme']).toBe("cream");
+  });
+
+  it("não aceita aparências desconhecidas ou preferências inválidas", () => {
     expect(parseAppSettings('{"appearance":"blue","textSize":"large","reduceMotion":"true"}')).toEqual(DEFAULT_APP_SETTINGS);
     expect(parseAppSettings("corrompido")).toEqual(DEFAULT_APP_SETTINGS);
     expect(parseAppSettings("[]")).toEqual(DEFAULT_APP_SETTINGS);

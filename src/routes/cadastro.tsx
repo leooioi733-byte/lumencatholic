@@ -1,7 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowLeft, Check, Eye, EyeOff } from "lucide-react";
-import mascote from "@/assets/lumen-mascote.png";
 import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
 import { cn } from "@/lib/utils";
 import {
@@ -74,8 +73,7 @@ function Cadastro() {
   if (done) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6 text-center">
-        <img src={mascote} alt="Cordeirinho do Lumen" className="animate-float-soft w-40" />
-        <h1 className="animate-rise mt-6 text-3xl font-bold text-primary">
+        <h1 className="animate-rise text-3xl font-bold text-primary">
           Bem-vindo, {data.nickname.trim()}!
         </h1>
         <p className="animate-rise mt-2 text-muted-foreground [animation-delay:120ms]">
@@ -228,7 +226,6 @@ function Step({ title, subtitle, children }: { title: string; subtitle?: string;
   return (
     <section className="flex flex-1 flex-col pt-6">
       <div className="mb-6 flex items-end gap-3">
-        <img src={mascote} alt="" className="w-16 shrink-0" />
         <div className="relative min-w-0 flex-1 rounded-2xl border-2 border-border bg-card px-4 py-3">
           <h1 className="text-xl font-semibold leading-snug text-primary">{title}</h1>
           {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
