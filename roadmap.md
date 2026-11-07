@@ -21,6 +21,6 @@
 - [x] Museu Católico: conferir navegação, imagens e leitura em celular e computador
 - [x] Configurações no canto superior direito: predominância creme/grená, som, leitura e animações
 - [x] Conferir preferências salvas, navegação e legibilidade no celular e computador
-- [ ] Adicionar aparência preta e amarela, preservando creme, grená e a interface
-- [ ] Remover o cordeirinho de todas as telas e imagens de instalação
-- [ ] Conferir a nova aparência, persistência, lições e telas em celular e computador
+- [x] Adicionar aparência preta e amarela, preservando creme, grená e a interface
+- [x] Remover o cordeirinho de todas as telas e imagens de instalação
+- [x] Conferir a nova aparência, persistência, lições e telas em celular e computador
