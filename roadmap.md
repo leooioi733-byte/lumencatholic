@@ -19,5 +19,5 @@
 - [x] Museu Católico: reunir fotografias reais com créditos e explicações históricas com fontes
 - [x] Museu Católico: integrar à Biblioteca, criar coleção com busca e categorias e páginas de cada imagem
 - [x] Museu Católico: conferir navegação, imagens e leitura em celular e computador
-- [ ] Configurações no canto superior direito: predominância creme/grená, som, leitura e animações
-- [ ] Conferir preferências salvas, navegação e legibilidade no celular e computador
+- [x] Configurações no canto superior direito: predominância creme/grená, som, leitura e animações
+- [x] Conferir preferências salvas, navegação e legibilidade no celular e computador
