@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import mascote from "@/assets/lumen-mascote.png";
 import { AppShell, ProgressBar, XpBadge } from "@/components/AppShell";
 import { LessonPath } from "@/components/LessonPath";
 import { lumenButton } from "@/components/ui/lumen-button";
@@ -40,7 +39,6 @@ function Inicio() {
             <p className="text-sm font-bold opacity-80">{next ? "Próxima lição" : "Trilha concluída!"}</p>
             <h2 className="mt-1 text-2xl font-semibold">{next ? next.title : "Parabéns!"}</h2>
           </div>
-          <img src={mascote} alt="" className="animate-float-soft w-20 shrink-0" />
         </div>
         {next && (
           <Link to="/licao/$id" params={{ id: next.id }} className={`${lumenButton({ variant: "gold" })} mt-4`}>

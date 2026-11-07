@@ -1,7 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { MascotReaction } from "@/components/MascotReaction";
 import { ProgressBar } from "@/components/AppShell";
 import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
 import { getLesson, lessonXp, type Lesson } from "@/lib/lessons";
@@ -48,8 +47,7 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
   if (earned !== null) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6 text-center">
-        <MascotReaction mood="celebrate" className="w-48" />
-        <h1 className="animate-rise mt-6 text-3xl font-bold text-primary">Lição concluída!</h1>
+        <h1 className="animate-rise text-3xl font-bold text-primary">Lição concluída!</h1>
         <p className="animate-rise mt-2 text-muted-foreground">{lesson.title}</p>
         <div className="animate-rise mt-6 rounded-2xl bg-gold px-6 py-3 font-display text-2xl font-bold text-gold-foreground">
           +{earned} XP
@@ -101,7 +99,6 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
               <p className="mt-3 text-lg leading-relaxed text-foreground">{teaching.text}</p>
               <p className="mt-4 text-sm font-bold text-muted-foreground">{teaching.source}</p>
             </div>
-            <MascotReaction mood="reading" className="mx-auto my-6 w-28" />
           </>
         ) : (
           q && (
@@ -137,7 +134,6 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
 
       {checked && q && (
         <div role="status" className={cn("animate-rise my-5 flex items-center gap-3 rounded-2xl p-3", correct ? "bg-success/15" : "bg-destructive/10")}>
-          <MascotReaction mood={correct ? "victory" : "oops"} className="w-20" />
           <div className="min-w-0 flex-1">
             <p className={cn("font-display text-lg font-bold", correct ? "text-success" : "text-destructive")}>
               {correct ? "Muito bem!" : "Opa! Vamos aprender:"}

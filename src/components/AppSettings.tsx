@@ -36,17 +36,18 @@ export function AppSettings() {
 
         <section className="mt-5" aria-labelledby="appearance-title">
           <h2 id="appearance-title" className="mb-3 text-sm font-semibold text-muted-foreground">Aparência</h2>
-          <div role="group" aria-label="Aparência" className="grid grid-cols-2 gap-3">
-            {([{ value: "cream", label: "Creme" }, { value: "burgundy", label: "Grená" }] as const).map(({ value, label }) => (
+          <div role="group" aria-label="Aparência" className="grid grid-cols-3 gap-2">
+            {([{ value: "cream", label: "Creme" }, { value: "burgundy", label: "Grená" }, { value: "black-yellow", label: "Preto e amarelo" }] as const).map(({ value, label }) => (
               <LumenButton key={value} variant="outline" data-sound="select" aria-pressed={settings.appearance === value}
                 disabled={!ready} onClick={() => updateSettings({ appearance: value })}
-                className={cn("h-auto flex-col gap-3 px-3 py-3 text-base normal-case", settings.appearance === value && "border-gold")}>
+                className={cn("relative h-auto min-w-0 flex-col gap-2 px-2 py-3 text-sm normal-case", settings.appearance === value && "border-gold")}>
                 <span aria-hidden="true" className={cn("theme-preview", `theme-preview-${value}`)}>
                   <span className="theme-preview-heading" />
                   <span className="theme-preview-card"><span /><span /></span>
                   <span className="theme-preview-button" />
                 </span>
-                <span className="flex w-full items-center justify-between">{label}<Check aria-hidden="true" className={cn("h-4 w-4 text-gold", settings.appearance !== value && "invisible")} /></span>
+                <span className="flex min-h-10 w-full items-center justify-center text-center leading-tight">{label}</span>
+                <Check aria-hidden="true" className={cn("absolute right-1 top-1 h-4 w-4 text-gold", settings.appearance !== value && "invisible")} />
               </LumenButton>
             ))}
           </div>
