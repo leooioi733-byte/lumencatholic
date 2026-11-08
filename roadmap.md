@@ -27,5 +27,5 @@
 - [x] Ampliar a Conta com apelido, símbolo e preferências pessoais editáveis
 - [x] Mostrar estatísticas da trilha e leitura da Bíblia, com marcação de capítulos lidos
 - [x] Conferir personalização, porcentagens, persistência e navegação em celular e computador
-- [ ] Adicionar Tema Natalino com a paleta solicitada e símbolos natalinos, preservando outras aparências
-- [ ] Conferir escolha salva, símbolos, legibilidade e navegação em celular e computador
+- [x] Adicionar Tema Natalino com a paleta solicitada e símbolos natalinos, preservando outras aparências
+- [x] Conferir escolha salva, símbolos, legibilidade e navegação em celular e computador
