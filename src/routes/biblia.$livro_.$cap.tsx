@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Check, CheckCircle2 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { useBibleProgress } from "@/components/BibleProgressProvider";
+import { LumenButton } from "@/components/ui/lumen-button";
+import { formatPercent, getReadingStats } from "@/lib/bible-progress";
 import { TextSizeControls } from "@/components/PrayerReader";
 import { useSettings } from "@/components/SettingsProvider";
 import { READING_SIZE_CLASSES } from "@/lib/settings";
@@ -32,6 +36,9 @@ function Capitulo() {
   const [data, setData] = useState<Chapters | null>(cache.get(book.slug) ?? null);
   const [error, setError] = useState(false);
   const { settings } = useSettings();
+  const { progress, ready, storageError, markRead } = useBibleProgress();
+  const read = progress.readChapters.includes(`${book.slug}:${cap}`);
+  const stats = getReadingStats(progress, [book]);
 
   useEffect(() => {
     const cached = cache.get(book.slug);
@@ -53,6 +60,10 @@ function Capitulo() {
         <h1 className="text-2xl font-bold text-primary">{book.name} {cap}</h1>
         <TextSizeControls />
       </div>
+      <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+        {read && <CheckCircle2 className="h-4 w-4 shrink-0 text-success" aria-hidden="true" />}
+        {read ? "Capítulo lido" : "Capítulo não marcado"} · {formatPercent(stats.percent)} de {book.name}
+      </p>
       <article className={cn("mt-4 break-words rounded-2xl border-2 border-border bg-card p-5 leading-relaxed text-foreground", READING_SIZE_CLASSES[settings.textSize])}>
         {error ? <p>Não foi possível carregar este capítulo. Verifique a conexão e tente novamente.</p>
           : !data ? <p className="text-muted-foreground">Carregando…</p>
@@ -60,6 +71,14 @@ function Capitulo() {
             <p key={v} className="mb-2"><sup className="mr-1 font-bold text-primary">{v}</sup>{t}</p>
           ))}
       </article>
+      <div className="mt-5">
+        <LumenButton variant={read ? "outline" : "gold"} className="gap-2 text-base normal-case"
+          disabled={!ready || error || verses.length === 0} aria-pressed={read}
+          onClick={() => markRead(book.slug, cap, !read)}>
+          <Check className="h-5 w-5 shrink-0" aria-hidden="true" />{read ? "Desmarcar como lido" : "Marcar capítulo como lido"}
+        </LumenButton>
+        {storageError && <p role="status" className="mt-3 text-sm text-destructive">O aparelho não permitiu guardar a leitura; a marcação vale apenas nesta visita.</p>}
+      </div>
       <div className="mt-5 flex justify-between gap-2">
         {cap > 1 ? <Link to="/biblia/$livro/$cap" params={{ livro: book.slug, cap: String(cap - 1) }} className={nav}>← Anterior</Link> : <span />}
         {cap < book.chapters && <Link to="/biblia/$livro/$cap" params={{ livro: book.slug, cap: String(cap + 1) }} className={nav}>Próximo →</Link>}
