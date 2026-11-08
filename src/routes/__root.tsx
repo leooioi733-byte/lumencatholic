@@ -16,6 +16,7 @@ import { PrayerProvider } from "@/components/PrayerProvider";
 import { AudioProvider } from "@/components/AudioProvider";
 import { AppSettings } from "@/components/AppSettings";
 import { SettingsProvider } from "@/components/SettingsProvider";
+import { BibleProgressProvider } from "@/components/BibleProgressProvider";
 import { registerLumenServiceWorker } from "@/lib/pwa-register";
 
 function NotFoundComponent() {
@@ -139,7 +140,7 @@ function RootComponent() {
       <SettingsProvider>
         <AudioProvider>
           <AppSettings />
-          <div className="audio-page"><PrayerProvider><Outlet /></PrayerProvider></div>
+          <div className="audio-page"><BibleProgressProvider><PrayerProvider><Outlet /></PrayerProvider></BibleProgressProvider></div>
         </AudioProvider>
       </SettingsProvider>
     </QueryClientProvider>
