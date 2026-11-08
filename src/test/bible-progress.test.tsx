@@ -34,8 +34,9 @@ describe("porcentagens da Bíblia", () => {
     const book = getBook("joao");
     if (!book) throw new Error("João ausente");
     const progress = { readChapters: ["joao:3", "genesis:1"] };
-    expect(getReadingStats(progress, [book])).toMatchObject({ read: 1, total: 21, percent: 4.7 });
-    expect(getReadingStats(progress, BIBLE_BOOKS.filter((b) => b.testament === "NT"))).toMatchObject({ read: 1, total: 260, percent: 0.3 });
+    expect(getReadingStats(progress, [book])).toMatchObject({ read: 1, total: 21, percent: 4.8 });
+    expect(getReadingStats(progress, BIBLE_BOOKS.filter((b) => b.testament === "NT"))).toMatchObject({ read: 1, total: 260, percent: 0.4 });
+    expect(getReadingStats({ readChapters: ["joao:3"] }).percent).toBe(0.1);
   });
   it("100% exige todos os capítulos distintos marcados", () => {
     const all = BIBLE_BOOKS.flatMap((book) => Array.from({ length: book.chapters }, (_, i) => `${book.slug}:${i + 1}`));

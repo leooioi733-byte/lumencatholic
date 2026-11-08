@@ -29,8 +29,9 @@ export function setChapterRead(progress: BibleProgress, slug: string, chapter: n
 
 export function completionPercent(completed: number, total: number) {
   if (total <= 0) return 0;
-  // Truncate to tenths: only a genuinely completed collection reaches 100%.
-  return Math.floor(Math.max(0, Math.min(completed, total)) / total * 1000) / 10;
+  // Display the first chapter's progress, reserving 100% for true completion.
+  const percent = Math.round(Math.max(0, Math.min(completed, total)) / total * 1000) / 10;
+  return completed < total ? Math.min(99.9, percent) : percent;
 }
 
 export function getReadingStats(progress: BibleProgress, books: BibleBook[] = BIBLE_BOOKS) {
