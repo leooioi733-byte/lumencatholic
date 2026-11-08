@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { Bell, ChevronRight } from "lucide-react";
+import { useSettings } from "@/components/SettingsProvider";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { usePrayers } from "@/components/PrayerProvider";
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/oracoes/")({
 });
 
 function Oracoes() {
+  const { settings } = useSettings();
   const { state } = usePrayers();
   const [onlyFav, setOnlyFav] = useState(false);
   const today = getMysterySet(mysteriesForDay(new Date().getDay()));
@@ -33,8 +35,8 @@ function Oracoes() {
       <h1 className="text-2xl font-bold text-primary">Orações</h1>
       <p className="mt-1 text-muted-foreground">Reze no seu ritmo, sem pressa e sem pontos.</p>
 
-      <Link to="/oracoes/terco" className="btn-3d mt-6 block rounded-2xl bg-primary p-5 text-primary-foreground [--btn-depth:var(--primary-deep)]">
-        <p className="text-xs font-bold uppercase tracking-wide text-gold">Terço guiado</p>
+      <Link to="/oracoes/terco" className="rosary-prompt btn-3d mt-6 block rounded-2xl bg-primary p-5 text-primary-foreground [--btn-depth:var(--primary-deep)]">
+        <p className="rosary-label flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-gold">{settings.appearance === "christmas" && <Bell className="h-4 w-4" aria-hidden="true" />}Terço guiado</p>
         <p className="mt-1 font-display text-xl font-semibold">{state.rosary && !state.rosary.completed ? "Continuar o terço" : "Rezar o terço"}</p>
         <p className="mt-1 text-sm opacity-90">Hoje: {today.title.toLowerCase()}</p>
       </Link>

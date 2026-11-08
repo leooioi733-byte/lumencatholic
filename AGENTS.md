@@ -23,3 +23,4 @@
 - Keep appearance, reading size and motion in a shared device-settings provider, independent of accounts, prayer sessions and XP; apply appearance through semantic CSS tokens and reuse reading controls across Bible and prayers so preferences stay consistent without changing progress.
 - Keep explicit chapter-read progress in its own browser provider and validated storage, separate from XP; derive Bible percentages from canonical chapter totals and lesson percentages from unique catalog IDs so browsing and repeat completions cannot inflate statistics.
 - Keep local profile edits typed and restricted to personal fields, preserving onboarding answers and progress; reuse existing device settings rather than duplicating them in the account.
+- Keep seasonal appearances in the existing device-settings catalog and semantic CSS tokens; swap only decorative symbols through shared theme helpers, leaving sourced content, control labels and saved choices unchanged.
