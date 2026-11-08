@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BookOpen, Church, Cross, Flower2, Heart, Save, Sun, type LucideIcon } from "lucide-react";
+import { BookOpen, Church, Cross, Flower2, Heart, Save, Star, Sun, type LucideIcon } from "lucide-react";
+import { useSettings } from "@/components/SettingsProvider";
 import { LumenButton } from "@/components/ui/lumen-button";
 import { PROFILE_LEVELS, PROFILE_SYMBOLS, PROFILE_TOPICS, type Profile, type ProfileEdit, type ProfileSymbol } from "@/lib/profile";
 import { cn } from "@/lib/utils";
@@ -12,7 +13,10 @@ const SYMBOLS: Record<ProfileSymbol, { icon: LucideIcon; label: string }> = {
 
 export function ProfileEmblem({ symbol }: { symbol: ProfileSymbol }) {
   const Icon = SYMBOLS[symbol].icon;
-  return <span className="grid h-20 w-20 shrink-0 place-items-center rounded-full border-2 border-gold bg-gold text-gold-foreground"><Icon className="h-9 w-9" aria-hidden="true" /></span>;
+  const { settings } = useSettings();
+  return <span className="relative grid h-20 w-20 shrink-0 place-items-center rounded-full border-2 border-gold bg-gold text-gold-foreground"><Icon className="h-9 w-9" aria-hidden="true" />
+    {settings.appearance === "christmas" && <span className="absolute -right-1 -top-1 grid h-7 w-7 place-items-center rounded-full border-2 border-background bg-primary text-primary-foreground"><Star className="h-4 w-4" aria-hidden="true" /></span>}
+  </span>;
 }
 
 export function ProfilePersonalization({ profile, saveProfile }: { profile: Profile; saveProfile: (patch: ProfileEdit) => boolean }) {

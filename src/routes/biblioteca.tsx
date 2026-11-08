@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Landmark } from "lucide-react";
+import { BookOpen, Gift, Landmark, Star } from "lucide-react";
+import { ThemeGlyph, ThemeIcon } from "@/components/ThemeSymbols";
 import { AppShell } from "@/components/AppShell";
 import { UNITS } from "@/lib/lessons";
 
@@ -23,24 +24,24 @@ function Biblioteca() {
       <h1 className="text-2xl font-bold text-primary">Biblioteca</h1>
       <p className="mt-1 text-muted-foreground">Os ensinamentos, com suas fontes.</p>
       <Link to="/biblia" className="mt-4 flex items-center gap-3 rounded-2xl border-2 border-gold bg-card p-4 transition active:scale-[0.98]">
-        <BookOpen className="h-8 w-8 text-primary" aria-hidden="true" />
+        <ThemeIcon icon={BookOpen} christmas={Star} className="h-8 w-8 shrink-0 text-primary" />
         <span><span className="block font-display text-lg font-semibold text-primary">Bíblia Sagrada</span>
         <span className="text-sm text-muted-foreground">Os 73 livros completos, do Gênesis ao Apocalipse</span></span>
       </Link>
       <Link to="/museu" className="mt-3 flex items-center gap-3 rounded-2xl border-2 border-gold bg-card p-4 transition active:scale-[0.98]">
-        <Landmark className="h-8 w-8 text-primary" aria-hidden="true" />
+        <ThemeIcon icon={Landmark} christmas={Gift} className="h-8 w-8 shrink-0 text-primary" />
         <span><span className="block font-display text-lg font-semibold text-primary">Museu Católico</span>
         <span className="text-sm text-muted-foreground">Fotos históricas com explicações e fontes</span></span>
       </Link>
       <div className="mt-6 space-y-8">
         {UNITS.map((unit) => (
           <section key={unit.id}>
-            <h2 className="mb-3 text-xl font-semibold text-primary">{unit.emoji} {unit.title}</h2>
+            <h2 className="mb-3 text-xl font-semibold text-primary"><ThemeGlyph index={UNITS.indexOf(unit)}>{unit.emoji}</ThemeGlyph> {unit.title}</h2>
             <div className="space-y-3">
         {unit.lessons.map((l) => (
           <details key={l.id} className="rounded-2xl border-2 border-border bg-card p-4">
             <summary className="cursor-pointer font-display text-lg font-semibold text-primary">
-              {l.emoji} {l.title}
+              <ThemeGlyph index={unit.lessons.indexOf(l)}>{l.emoji}</ThemeGlyph> {l.title}
             </summary>
             <div className="mt-3 space-y-3">
               {l.teachings.map((t) => (

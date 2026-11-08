@@ -1,11 +1,12 @@
-import { Check, Minus, Music2, Plus, Settings, Sparkles, Type, Volume2 } from "lucide-react";
+import { Bell, Check, Minus, Music2, Plus, Settings, Sparkles, Star, TreePine, Type, Volume2 } from "lucide-react";
+import { ThemeIcon } from "@/components/ThemeSymbols";
 import { useAudio } from "@/components/AudioProvider";
 import { useSettings } from "@/components/SettingsProvider";
 import { LumenButton } from "@/components/ui/lumen-button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { READING_SIZE_CLASSES, READING_SIZE_LABELS } from "@/lib/settings";
+import { APPEARANCE_OPTIONS, READING_SIZE_CLASSES, READING_SIZE_LABELS } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 
 export function AppSettings() {
@@ -36,8 +37,8 @@ export function AppSettings() {
 
         <section className="mt-5" aria-labelledby="appearance-title">
           <h2 id="appearance-title" className="mb-3 text-sm font-semibold text-muted-foreground">Aparência</h2>
-          <div role="group" aria-label="Aparência" className="grid grid-cols-3 gap-2">
-            {([{ value: "cream", label: "Creme" }, { value: "burgundy", label: "Grená" }, { value: "black-yellow", label: "Preto e amarelo" }] as const).map(({ value, label }) => (
+          <div role="group" aria-label="Aparência" className="grid grid-cols-2 gap-3">
+            {APPEARANCE_OPTIONS.map(({ value, label }) => (
               <LumenButton key={value} variant="outline" data-sound="select" aria-pressed={settings.appearance === value}
                 disabled={!ready} onClick={() => updateSettings({ appearance: value })}
                 className={cn("relative h-auto min-w-0 flex-col gap-2 px-2 py-3 text-sm normal-case", settings.appearance === value && "border-gold")}>
@@ -46,7 +47,7 @@ export function AppSettings() {
                   <span className="theme-preview-card"><span /><span /></span>
                   <span className="theme-preview-button" />
                 </span>
-                <span className="flex min-h-10 w-full items-center justify-center text-center leading-tight">{label}</span>
+                <span className="flex min-h-10 w-full items-center justify-center gap-1 text-center leading-tight">{value === "christmas" && <TreePine className="h-4 w-4 shrink-0" aria-hidden="true" />}{label}</span>
                 <Check aria-hidden="true" className={cn("absolute right-1 top-1 h-4 w-4 text-gold", settings.appearance !== value && "invisible")} />
               </LumenButton>
             ))}
@@ -60,7 +61,7 @@ export function AppSettings() {
             <Switch id="settings-music" checked={preferences.music} onCheckedChange={toggleMusic} />
           </label>
           <label htmlFor="settings-effects" className="flex min-h-12 cursor-pointer items-center justify-between gap-3">
-            <span className="flex items-center gap-3 font-bold"><Volume2 aria-hidden="true" className="h-5 w-5 text-primary" />Efeitos sonoros</span>
+            <span className="flex items-center gap-3 font-bold"><ThemeIcon icon={Volume2} christmas={Bell} className="h-5 w-5 text-primary" />Efeitos sonoros</span>
             <Switch id="settings-effects" checked={preferences.effects} onCheckedChange={toggleEffects} />
           </label>
         </section>
@@ -79,7 +80,7 @@ export function AppSettings() {
           </div>
           <p className={cn("mt-4 break-words rounded-2xl bg-card p-3 leading-relaxed text-card-foreground", READING_SIZE_CLASSES[settings.textSize])}>O Senhor é meu pastor.</p>
           <label htmlFor="settings-motion" className="mt-2 flex min-h-12 cursor-pointer items-center justify-between gap-3">
-            <span className="flex items-center gap-3 font-bold"><Sparkles aria-hidden="true" className="h-5 w-5 shrink-0 text-primary" />Reduzir animações</span>
+            <span className="flex items-center gap-3 font-bold"><ThemeIcon icon={Sparkles} christmas={Star} className="h-5 w-5 shrink-0 text-primary" />Reduzir animações</span>
             <Switch id="settings-motion" disabled={!ready} checked={settings.reduceMotion} onCheckedChange={(reduceMotion) => updateSettings({ reduceMotion })} />
           </label>
         </section>

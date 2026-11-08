@@ -11,6 +11,7 @@ function Preferences() {
     <LumenButton onClick={() => updateSettings({ appearance: "burgundy" })}>Grená</LumenButton>
     <LumenButton onClick={() => updateSettings({ appearance: "cream" })}>Creme</LumenButton>
     <LumenButton onClick={() => updateSettings({ appearance: "black-yellow" })}>Preto e amarelo</LumenButton>
+    <LumenButton onClick={() => updateSettings({ appearance: "christmas" })}>Tema Natalino</LumenButton>
     <LumenButton onClick={() => updateSettings({ textSize: 3 })}>Letra</LumenButton>
     <LumenButton onClick={() => updateSettings({ reduceMotion: true })}>Movimento</LumenButton>
   </>;
@@ -61,6 +62,39 @@ describe("preferências do aparelho", () => {
     expect(parseAppSettings('{"appearance":"blue","textSize":"large","reduceMotion":"true"}')).toEqual(DEFAULT_APP_SETTINGS);
     expect(parseAppSettings("corrompido")).toEqual(DEFAULT_APP_SETTINGS);
     expect(parseAppSettings("[]")).toEqual(DEFAULT_APP_SETTINGS);
+  });
+
+  it("permite escolher o Tema Natalino, lembra a escolha e retorna às aparências anteriores", () => {
+    const view = render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "Tema Natalino" }));
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("christmas");
+    view.unmount();
+    render(<App />);
+    expect(JSON.parse(screen.getByTestId("settings").textContent ?? "{}").appearance).toBe("christmas");
+    fireEvent.click(screen.getByRole("button", { name: "Creme" }));
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("cream");
+    fireEvent.click(screen.getByRole("button", { name: "Grená" }));
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("burgundy");
+    fireEvent.click(screen.getByRole("button", { name: "Preto e amarelo" }));
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY)).appearance).toBe("black-yellow");
+  });
+
+  it("o Tema Natalino não altera perfil, XP, Bíblia, áudio nem oração", () => {
+    const preserved = {
+      "lumen-profile": '{"nickname":"Ana","symbol":"heart","topic":"Bíblia"}',
+      "lumen-progress": '{"xp":25,"completed":["biblia"]}',
+      "lumen-bible-progress": '{"readChapters":["joao:3"]}',
+      "lumen-audio-preferences": '{"music":false,"effects":true}',
+    };
+    Object.entries(preserved).forEach(([key, value]) => localStorage.setItem(key, value));
+    sessionStorage.setItem("lumen-prayer-session", '{"favorites":["pai-nosso"]}');
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: "Letra" }));
+    fireEvent.click(screen.getByRole("button", { name: "Movimento" }));
+    fireEvent.click(screen.getByRole("button", { name: "Tema Natalino" }));
+    expect(parseAppSettings(localStorage.getItem(SETTINGS_STORAGE_KEY))).toEqual({ appearance: "christmas", textSize: 3, reduceMotion: true });
+    Object.entries(preserved).forEach(([key, value]) => expect(localStorage.getItem(key)).toBe(value));
+    expect(sessionStorage.getItem("lumen-prayer-session")).toBe('{"favorites":["pai-nosso"]}');
   });
 
   it("mantém o tamanho da letra entre os cinco tamanhos disponíveis", () => {

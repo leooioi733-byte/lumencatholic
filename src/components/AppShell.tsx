@@ -1,28 +1,29 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpen, Flame, Home, Map, User } from "lucide-react";
+import { Bell, BookOpen, Flame, Gift, Home, Map, Route, Star, TreePine, User } from "lucide-react";
 import type { ReactNode } from "react";
+import { ThemeGlyph, ThemeIcon } from "@/components/ThemeSymbols";
 
 const TABS = [
-  { to: "/inicio", label: "Início", icon: Home },
-  { to: "/trilha", label: "Trilha", icon: Map },
-  { to: "/oracoes", label: "Orações", icon: Flame },
-  { to: "/biblioteca", label: "Biblioteca", icon: BookOpen },
-  { to: "/perfil", label: "Conta", icon: User },
+  { to: "/inicio", label: "Início", icon: Home, christmas: TreePine },
+  { to: "/trilha", label: "Trilha", icon: Map, christmas: Route },
+  { to: "/oracoes", label: "Orações", icon: Flame, christmas: Bell },
+  { to: "/biblioteca", label: "Biblioteca", icon: BookOpen, christmas: Gift },
+  { to: "/perfil", label: "Conta", icon: User, christmas: Star },
 ] as const;
 
 export function AppShell({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   return (
     <div className={`mx-auto min-h-dvh pb-24 ${wide ? "max-w-4xl" : "max-w-md"}`}>
       <main className="animate-rise px-5 pt-6">{children}</main>
-      <nav className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-border bg-card">
+      <nav className="lumen-navigation fixed inset-x-0 bottom-0 z-20 border-t-2 border-border bg-card">
         <ul className="mx-auto grid max-w-md grid-cols-5">
-          {TABS.map(({ to, label, icon: Icon }) => (
+          {TABS.map(({ to, label, icon, christmas }) => (
             <li key={to}>
               <Link
                 to={to}
                 className="flex flex-col items-center gap-1 py-3 text-xs font-bold text-muted-foreground transition active:scale-90 data-[status=active]:text-primary"
               >
-                <Icon className="h-6 w-6" />
+                <ThemeIcon icon={icon} christmas={christmas} className="h-6 w-6" />
                 {label}
               </Link>
             </li>
@@ -36,7 +37,7 @@ export function AppShell({ children, wide = false }: { children: ReactNode; wide
 export function XpBadge({ xp }: { xp: number }) {
   return (
     <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3 py-1 font-display text-sm font-semibold text-gold-foreground">
-      ✦ {xp} XP
+      <ThemeGlyph>✦</ThemeGlyph> {xp} XP
     </span>
   );
 }

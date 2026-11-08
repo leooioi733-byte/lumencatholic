@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { lumenButton } from "@/components/ui/lumen-button";
+import { ChristmasMark } from "@/components/ThemeSymbols";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ function Welcome() {
       <header className="animate-rise text-center">
         <h1 className="text-5xl font-bold text-primary">Lumen</h1>
         <div className="mx-auto mt-2 h-1.5 w-12 rounded-full bg-gold" />
+        <ChristmasMark className="mt-6" />
       </header>
 
       <section className="flex flex-1 flex-col items-center justify-center py-6">

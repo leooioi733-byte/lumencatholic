@@ -4,6 +4,7 @@ import { LessonPath } from "@/components/LessonPath";
 import { lumenButton } from "@/components/ui/lumen-button";
 import { LESSONS, UNITS, getLessonUnit, nextLesson } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
+import { ChristmasMark } from "@/components/ThemeSymbols";
 
 export const Route = createFileRoute("/inicio")({
   head: () => ({
@@ -33,7 +34,8 @@ function Inicio() {
         <XpBadge xp={progress.xp} />
       </header>
 
-      <section className="mt-6 rounded-3xl bg-primary p-5 text-primary-foreground">
+      <section className="lesson-prompt mt-6 rounded-3xl bg-primary p-5 text-primary-foreground">
+        <ChristmasMark className="mb-3 w-full [&_svg]:text-primary-foreground" />
         <div className="flex items-center gap-4">
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold opacity-80">{next ? "Próxima lição" : "Trilha concluída!"}</p>

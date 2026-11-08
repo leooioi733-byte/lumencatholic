@@ -126,6 +126,10 @@
   --palette-black: oklch(0.13 0 0);
   --palette-black-card: oklch(0.2 0 0);
   --palette-yellow: oklch(0.87 0.17 94);
+  /* Christmas palette: #A83D43, #315B43 and #F5EBD8. */
+  --palette-christmas-red: oklch(0.511348607 0.140751323 20.340744981);
+  --palette-christmas-green: oklch(0.432974616 0.062237560 157.418461999);
+  --palette-christmas-cream: oklch(0.942876174 0.027386133 83.536751998);
   --overlay: oklch(0.25 0.08 5 / 75%);
   --radius: 1.25rem;
   --background: var(--palette-cream);
@@ -155,6 +159,9 @@
   --border: oklch(0.88 0.03 75);
   --input: oklch(0.88 0.03 75);
   --ring: oklch(0.83 0.13 80);
+  --navigation: var(--card);
+  --navigation-foreground: var(--muted-foreground);
+  --navigation-active: var(--primary);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -232,6 +239,58 @@
   color-scheme: dark;
 }
 
+:root[data-lumen-theme="christmas"] {
+  --background: var(--palette-christmas-cream);
+  --foreground: var(--palette-christmas-green);
+  --card: color-mix(in oklch, var(--palette-christmas-cream) 96%, white);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: var(--palette-christmas-red);
+  --primary-foreground: var(--palette-christmas-cream);
+  --primary-deep: color-mix(in oklch, var(--palette-christmas-red) 75%, black);
+  --secondary: var(--palette-christmas-green);
+  --secondary-foreground: var(--palette-christmas-cream);
+  --gold: var(--palette-christmas-green);
+  --gold-foreground: var(--palette-christmas-cream);
+  --gold-deep: color-mix(in oklch, var(--palette-christmas-green) 75%, black);
+  --muted: color-mix(in oklch, var(--palette-christmas-cream) 85%, var(--palette-christmas-green));
+  --muted-foreground: var(--palette-christmas-green);
+  --accent: color-mix(in oklch, var(--palette-christmas-cream) 92%, var(--palette-christmas-red));
+  --accent-foreground: var(--palette-christmas-red);
+  --border: color-mix(in oklch, var(--palette-christmas-cream) 70%, var(--palette-christmas-green));
+  --input: var(--border);
+  --ring: var(--palette-christmas-red);
+  --success: var(--palette-christmas-green);
+  --success-foreground: var(--palette-christmas-cream);
+  --success-deep: var(--gold-deep);
+  --destructive: var(--palette-christmas-red);
+  --destructive-foreground: var(--palette-christmas-cream);
+  --destructive-deep: var(--primary-deep);
+  --overlay: color-mix(in oklch, var(--palette-christmas-green) 75%, transparent);
+  --navigation: var(--palette-christmas-green);
+  --navigation-foreground: var(--palette-christmas-cream);
+  --navigation-active: var(--palette-christmas-cream);
+  color-scheme: light;
+}
+
+.lumen-navigation { background: var(--navigation); }
+.lumen-navigation a { color: var(--navigation-foreground); }
+.lumen-navigation a[data-status="active"] { color: var(--navigation-active); }
+:root[data-lumen-theme="christmas"] .lumen-navigation a[data-status="active"] {
+  background: color-mix(in oklch, var(--palette-christmas-cream) 12%, var(--palette-christmas-green));
+  box-shadow: inset 0 3px 0 var(--palette-christmas-cream);
+}
+:root[data-lumen-theme="christmas"] .lesson-prompt {
+  background: var(--palette-christmas-green);
+  color: var(--palette-christmas-cream);
+}
+:root[data-lumen-theme="christmas"] .lesson-prompt .btn-3d {
+  background: var(--palette-christmas-red);
+  --btn-depth: var(--primary-deep);
+}
+:root[data-lumen-theme="christmas"] .rosary-prompt .rosary-label { color: var(--palette-christmas-cream); }
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -278,6 +337,13 @@
   --preview-card: var(--palette-black-card);
   --preview-ink: var(--palette-yellow);
 }
+.theme-preview-christmas {
+  --preview-background: var(--palette-christmas-cream);
+  --preview-card: var(--palette-christmas-green);
+  --preview-ink: var(--palette-christmas-red);
+}
+.theme-preview-christmas .theme-preview-card > span { background: var(--palette-christmas-cream); }
+.theme-preview-christmas .theme-preview-button { background: var(--palette-christmas-red); }
 .theme-preview-heading { width: 40%; height: .3rem; border-radius: .2rem; background: var(--preview-ink); }
 .theme-preview-card { display: grid; gap: .25rem; padding: .45rem; border-radius: .3rem; background: var(--preview-card); }
 .theme-preview-card > span { width: 85%; height: .2rem; border-radius: .2rem; background: var(--preview-ink); opacity: .65; }
