@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookOpen, Church, Cross, Flower2, Heart, Save, Sun, type LucideIcon } from "lucide-react";
 import { LumenButton } from "@/components/ui/lumen-button";
 import { PROFILE_LEVELS, PROFILE_SYMBOLS, PROFILE_TOPICS, type Profile, type ProfileEdit, type ProfileSymbol } from "@/lib/profile";
@@ -18,6 +18,7 @@ export function ProfileEmblem({ symbol }: { symbol: ProfileSymbol }) {
 export function ProfilePersonalization({ profile, saveProfile }: { profile: Profile; saveProfile: (patch: ProfileEdit) => boolean }) {
   const [draft, setDraft] = useState<ProfileEdit>({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic });
   const [message, setMessage] = useState("");
+  useEffect(() => { setDraft({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic }); }, [profile]);
   const change = (patch: Partial<ProfileEdit>) => { setDraft((previous) => ({ ...previous, ...patch })); setMessage(""); };
   const field = "mt-2 w-full min-w-0 rounded-xl border-2 border-border bg-card px-3 py-3 text-foreground outline-none focus:border-gold focus-visible:ring-2 focus-visible:ring-ring";
   return (

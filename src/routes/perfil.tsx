@@ -79,7 +79,7 @@ function Perfil() {
 
       <section className="mt-8 border-t-2 border-border pt-6" aria-labelledby="personal-title">
         <h2 id="personal-title" className="text-xl font-semibold text-primary">Do seu jeito</h2>
-        {ready ? <ProfilePersonalization key={JSON.stringify(profile)} profile={profile} saveProfile={saveProfile} /> : <p className="mt-4 text-muted-foreground">Carregando preferências…</p>}
+        {ready ? <ProfilePersonalization profile={profile} saveProfile={saveProfile} /> : <p className="mt-4 text-muted-foreground">Carregando preferências…</p>}
         <p className="text-xs text-muted-foreground">Perfil e progresso guardados neste aparelho.</p>
       </section>
     </AppShell>
