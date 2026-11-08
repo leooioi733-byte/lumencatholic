@@ -24,6 +24,6 @@
 - [x] Adicionar aparência preta e amarela, preservando creme, grená e a interface
 - [x] Remover o cordeirinho de todas as telas e imagens de instalação
 - [x] Conferir a nova aparência, persistência, lições e telas em celular e computador
-- [ ] Ampliar a Conta com apelido, símbolo e preferências pessoais editáveis
-- [ ] Mostrar estatísticas da trilha e leitura da Bíblia, com marcação de capítulos lidos
-- [ ] Conferir personalização, porcentagens, persistência e navegação em celular e computador
+- [x] Ampliar a Conta com apelido, símbolo e preferências pessoais editáveis
+- [x] Mostrar estatísticas da trilha e leitura da Bíblia, com marcação de capítulos lidos
+- [x] Conferir personalização, porcentagens, persistência e navegação em celular e computador
