@@ -24,3 +24,5 @@
 - Keep explicit chapter-read progress in its own browser provider and validated storage, separate from XP; derive Bible percentages from canonical chapter totals and lesson percentages from unique catalog IDs so browsing and repeat completions cannot inflate statistics.
 - Keep local profile edits typed and restricted to personal fields, preserving onboarding answers and progress; reuse existing device settings rather than duplicating them in the account.
 - Keep seasonal appearances in the existing device-settings catalog and semantic CSS tokens; swap only decorative symbols through shared theme helpers, leaving sourced content, control labels and saved choices unchanged.
+- Mount one persistent mascot provider and GlobalMascot at the root; dispatch presentation events from verified lesson handlers without changing XP, and collision-check painted content to keep the companion clear of navigation and controls.
+- Store validated mascot outfit choices in the existing local profile and synchronize same-tab profile edits; dress the official portrait with separate accessory overlays so its face and proportions never change.

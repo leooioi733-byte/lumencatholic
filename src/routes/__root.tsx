@@ -18,6 +18,8 @@ import { AppSettings } from "@/components/AppSettings";
 import { SettingsProvider } from "@/components/SettingsProvider";
 import { BibleProgressProvider } from "@/components/BibleProgressProvider";
 import { registerLumenServiceWorker } from "@/lib/pwa-register";
+import { MascotProvider } from "@/components/MascotProvider";
+import { GlobalMascot } from "@/components/GlobalMascot";
 
 function NotFoundComponent() {
   return (
@@ -139,8 +141,11 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <SettingsProvider>
         <AudioProvider>
+          <MascotProvider>
           <AppSettings />
           <div className="audio-page"><BibleProgressProvider><PrayerProvider><Outlet /></PrayerProvider></BibleProgressProvider></div>
+          <GlobalMascot />
+          </MascotProvider>
         </AudioProvider>
       </SettingsProvider>
     </QueryClientProvider>
