@@ -29,3 +29,6 @@
 - [x] Conferir personalização, porcentagens, persistência e navegação em celular e computador
 - [x] Adicionar Tema Natalino com a paleta solicitada e símbolos natalinos, preservando outras aparências
 - [x] Conferir escolha salva, símbolos, legibilidade e navegação em celular e computador
+- [ ] Integrar mascote oficial global com balão contextual e aparições especiais não bloqueantes
+- [ ] Personalizar roupas na Conta e preservar a escolha durante a navegação
+- [ ] Conferir mascote, navegação, lições e ausência de sobreposições em celular e computador
