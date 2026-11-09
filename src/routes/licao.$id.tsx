@@ -1,12 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
 import { ProgressBar } from "@/components/AppShell";
 import { LumenButton, lumenButton } from "@/components/ui/lumen-button";
-import { getLesson, lessonXp, type Lesson } from "@/lib/lessons";
+import { getLesson, getLessonUnit, lessonXp, type Lesson } from "@/lib/lessons";
 import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
 import { useAudio } from "@/components/AudioProvider";
+import { useMascot } from "@/components/MascotProvider";
+import { completionMascotEvent } from "@/lib/mascot";
 
 export const Route = createFileRoute("/licao/$id")({
   loader: ({ params }) => {
@@ -33,8 +35,9 @@ function Licao() {
 }
 
 function LessonSession({ lesson }: { lesson: Lesson }) {
-  const { complete } = useProgress();
+  const { progress, complete } = useProgress();
   const { play } = useAudio();
+  const { notify } = useMascot();
   const nT = lesson.teachings.length;
   const nQ = lesson.questions.length;
   const [step, setStep] = useState(0);
@@ -42,6 +45,14 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
   const [checked, setChecked] = useState(false);
   const [mistakes, setMistakes] = useState(0);
   const [earned, setEarned] = useState<number | null>(null);
+
+  useEffect(() => { notify({ moment: "lessonStart", label: lesson.title }); }, [lesson.id, lesson.title, notify]);
+  useEffect(() => {
+    const unit = getLessonUnit(lesson.id);
+    if (unit?.lessons[0]?.id === lesson.id && !progress.completed.includes(lesson.id)) {
+      notify({ moment: "newUnit", special: true, key: `unit:${unit.id}`, label: unit.title });
+    }
+  }, [lesson.id, progress.completed, notify]);
 
   const total = nT + nQ;
   if (earned !== null) {
@@ -68,6 +79,7 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
       const xp = lessonXp(lesson, mistakes);
       complete(lesson.id, xp);
       setEarned(xp);
+      notify(completionMascotEvent(progress.completed, lesson.id));
       return;
     }
     setStep(step + 1);
@@ -78,6 +90,7 @@ function LessonSession({ lesson }: { lesson: Lesson }) {
     if (picked === null || checked || !q) return;
     setChecked(true);
     play(correct ? "correct" : "incorrect");
+    notify({ moment: correct ? "correct" : "incorrect" });
     if (!correct) setMistakes((m) => m + 1);
   };
 

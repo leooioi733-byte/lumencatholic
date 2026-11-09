@@ -4,6 +4,8 @@ import { useSettings } from "@/components/SettingsProvider";
 import { LumenButton } from "@/components/ui/lumen-button";
 import { PROFILE_LEVELS, PROFILE_SYMBOLS, PROFILE_TOPICS, type Profile, type ProfileEdit, type ProfileSymbol } from "@/lib/profile";
 import { cn } from "@/lib/utils";
+import { MascotPortrait } from "@/components/MascotPortrait";
+import { MASCOT_OUTFITS, OUTFIT_LABELS } from "@/lib/mascot";
 
 const SYMBOLS: Record<ProfileSymbol, { icon: LucideIcon; label: string }> = {
   cross: { icon: Cross, label: "Cruz" }, book: { icon: BookOpen, label: "Livro" },
@@ -20,9 +22,9 @@ export function ProfileEmblem({ symbol }: { symbol: ProfileSymbol }) {
 }
 
 export function ProfilePersonalization({ profile, saveProfile }: { profile: Profile; saveProfile: (patch: ProfileEdit) => boolean }) {
-  const [draft, setDraft] = useState<ProfileEdit>({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic });
+  const [draft, setDraft] = useState<ProfileEdit>({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic, mascotOutfit: profile.mascotOutfit });
   const [message, setMessage] = useState("");
-  useEffect(() => { setDraft({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic }); }, [profile]);
+  useEffect(() => { setDraft({ nickname: profile.nickname, symbol: profile.symbol, level: profile.level, topic: profile.topic, mascotOutfit: profile.mascotOutfit }); }, [profile]);
   const change = (patch: Partial<ProfileEdit>) => { setDraft((previous) => ({ ...previous, ...patch })); setMessage(""); };
   const field = "mt-2 w-full min-w-0 rounded-xl border-2 border-border bg-card px-3 py-3 text-foreground outline-none focus:border-gold focus-visible:ring-2 focus-visible:ring-ring";
   return (
@@ -44,6 +46,18 @@ export function ProfilePersonalization({ profile, saveProfile }: { profile: Prof
               className={cn("aspect-square h-auto min-w-0 p-0", draft.symbol === symbol && "ring-2 ring-gold")}
               onClick={() => change({ symbol })}><Icon className="h-5 w-5" aria-hidden="true" /></LumenButton>;
           })}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend className="mb-3 font-bold">Roupa do cordeirinho</legend>
+        <div className="grid grid-cols-3 gap-2">
+          {MASCOT_OUTFITS.map((outfit) => <LumenButton key={outfit} type="button" data-sound="select"
+            aria-label={`Roupa ${OUTFIT_LABELS[outfit]}`} aria-pressed={draft.mascotOutfit === outfit}
+            variant={draft.mascotOutfit === outfit ? "selectedAnswer" : "outline"}
+            onClick={() => change({ mascotOutfit: outfit })} className="h-auto min-w-0 flex-col gap-2 px-2 py-3 text-sm normal-case">
+            <MascotPortrait outfit={outfit} className="h-24 w-20" />
+            <span className="break-words">{OUTFIT_LABELS[outfit]}</span>
+          </LumenButton>)}
         </div>
       </fieldset>
       <label className="block font-bold">Seu momento na fé

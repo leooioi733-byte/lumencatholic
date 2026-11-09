@@ -376,6 +376,39 @@
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
 @utility animate-rise { animation: rise-in 600ms cubic-bezier(.2,.8,.2,1) both; }
 
+/* The official portrait is never recolored: accessories are separate layers. */
+:root {
+  --mascot-pilgrim-fabric: var(--palette-burgundy);
+  --mascot-pilgrim-trim: var(--palette-gold);
+  --mascot-christmas-fabric: var(--palette-christmas-red);
+  --mascot-christmas-trim: var(--palette-christmas-cream);
+  --mascot-shadow: 0 3px 0 var(--border);
+}
+.mascot-portrait { position: relative; display: inline-block; aspect-ratio: 720 / 850; flex-shrink: 0; }
+.mascot-portrait > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.mascot-outfit { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.mascot-outfit-pilgrim { --mascot-fabric: var(--mascot-pilgrim-fabric); --mascot-trim: var(--mascot-pilgrim-trim); }
+.mascot-outfit-christmas { --mascot-fabric: var(--mascot-christmas-fabric); --mascot-trim: var(--mascot-christmas-trim); }
+.mascot-fabric { fill: var(--mascot-fabric); }
+.mascot-trim { fill: var(--mascot-trim); }
+.global-mascot { position: fixed; z-index: 30; width: 56px; height: 68px; pointer-events: none; }
+.global-mascot-large { width: 104px; height: 124px; }
+.global-mascot-hidden { visibility: hidden; pointer-events: none; }
+.global-mascot .mascot-trigger { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; box-shadow: none; border-radius: .5rem; pointer-events: auto; }
+.global-mascot .mascot-trigger:active { transform: translateY(2px); }
+.mascot-motion { display: block; width: 100%; height: 100%; transform-origin: 50% 85%; }
+.mascot-motion .mascot-portrait { width: 100%; height: 100%; }
+.mascot-bubble { position: absolute; right: 0; width: min(244px, calc(100vw - 24px)); padding: .65rem .75rem .8rem; border-radius: 1rem; box-shadow: var(--mascot-shadow); pointer-events: auto; }
+.mascot-bubble[data-position="above"] { bottom: calc(100% + 12px); }
+.mascot-bubble[data-position="below"] { top: calc(100% + 12px); }
+.mascot-bubble[data-position="hidden"] { visibility: hidden; pointer-events: none; }
+@keyframes mascot-breathe { 0%, 70%, 100% { transform: none; } 80% { transform: scale(1.02, 1.025); } }
+@keyframes mascot-celebrate { 0%, 100% { transform: none; } 20% { transform: translateY(-6px) rotate(-5deg); } 45% { transform: translateY(0) rotate(4deg); } 70% { transform: translateY(-3px) rotate(-2deg); } }
+@keyframes mascot-encourage { 0%, 100% { transform: none; } 45% { transform: rotate(-4deg); } 70% { transform: rotate(2deg); } }
+.mascot-breathe { animation: mascot-breathe 8s ease-in-out 2; }
+.mascot-celebrate { animation: mascot-celebrate 1.1s ease-in-out 1; }
+.mascot-encourage { animation: mascot-encourage .7s ease-in-out 1; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
