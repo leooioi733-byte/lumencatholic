@@ -53,7 +53,7 @@ export function rectsOverlap(a: MascotRect, b: MascotRect, gap = 4) {
 /** Keep the right edge stable, moving only when actual page content needs the space. */
 export function findMascotSlot(width: number, height: number, bottom: number, size: { width: number; height: number }, obstacles: MascotRect[]): MascotRect | null {
   const x = width - size.width - 12;
-  for (let y = height - bottom - size.height; y >= 68; y -= 8) {
+  for (let y = height - bottom - size.height; y >= 64; y -= 4) {
     const candidate = { x, y, ...size };
     if (x >= 0 && !obstacles.some((rect) => rectsOverlap(candidate, rect))) return candidate;
   }
