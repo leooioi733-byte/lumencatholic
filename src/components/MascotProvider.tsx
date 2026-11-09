@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { MASCOT_MESSAGES, routeMascotMoment, type MascotEvent, type MascotMoment } from "@/lib/mascot";
 
@@ -42,7 +42,7 @@ export function MascotProvider({ children }: { children: ReactNode }) {
     update({ ...current.current, open: true, special: false, message: messageFor(current.current.event) });
   }, [clearTimer, dismiss, messageFor, update]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     clearTimer();
     const event = { moment: routeMascotMoment(pathname) };
     update({ ...current.current, event, special: false, open: false, message: "" });

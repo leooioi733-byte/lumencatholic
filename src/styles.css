@@ -393,6 +393,7 @@
 .mascot-trim { fill: var(--mascot-trim); }
 .global-mascot { position: fixed; z-index: 30; width: 56px; height: 68px; pointer-events: none; }
 .global-mascot-large { width: 104px; height: 124px; }
+.global-mascot-compact { width: 44px; height: 52px; }
 .global-mascot-hidden { visibility: hidden; pointer-events: none; }
 .global-mascot .mascot-trigger { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; box-shadow: none; border-radius: .5rem; pointer-events: auto; }
 .global-mascot .mascot-trigger:active { transform: translateY(2px); }

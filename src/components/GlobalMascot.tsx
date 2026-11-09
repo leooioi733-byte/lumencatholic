@@ -35,7 +35,7 @@ export function GlobalMascot() {
   const { profile } = useLocalProfile();
   const pathname = useLocation({ select: (location) => location.pathname });
   const root = useRef<HTMLElement>(null);
-  const [position, setPosition] = useState<{ x: number; y: number; large: boolean; bubble: "above" | "below" | "hidden"; hidden: boolean } | null>(null);
+  const [position, setPosition] = useState<{ x: number; y: number; large: boolean; compact: boolean; bubble: "above" | "below" | "hidden"; hidden: boolean } | null>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -49,10 +49,11 @@ export function GlobalMascot() {
       const small = { width: 56, height: 68 };
       const big = { width: 104, height: 124 };
       let large = special;
+      let compact = false;
       let slot = findMascotSlot(width, height, bottom, large ? big : small, obstacles);
       if (!slot && large) { large = false; slot = findMascotSlot(width, height, bottom, small, obstacles); }
-      // On exceptionally dense screens keep a compact, safe-area companion below navigation.
-      // It is tucked out of the way until a free slot appears, rather than covering content.
+      if (!slot) { compact = true; slot = findMascotSlot(width, height, bottom, { width: 44, height: 52 }, obstacles); }
+      // Truly full screens prioritize the existing controls; the same companion stays mounted.
       if (!slot) { setPosition((prev) => prev ? { ...prev, hidden: true } : null); return; }
       let bubble: "above" | "below" | "hidden" = "hidden";
       if (open && root.current) {
@@ -71,7 +72,7 @@ export function GlobalMascot() {
           if (safe) bubble = safe === above ? "above" : "below";
         }
       }
-      const next = { x: slot.x, y: slot.y, large, bubble, hidden: Boolean(modal) };
+      const next = { x: slot.x, y: slot.y, large, compact, bubble, hidden: Boolean(modal) };
       setPosition((prev) => prev && Object.keys(next).every((key) => prev[key as keyof typeof next] === next[key as keyof typeof next]) ? prev : next);
     };
     const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(place); };
@@ -98,7 +99,7 @@ export function GlobalMascot() {
   }, [open, dismiss]);
 
   return <aside ref={root} data-global-mascot data-moment={event.moment} data-outfit={profile.mascotOutfit} data-special={special}
-    aria-label="Companheiro Lumen" className={cn("global-mascot", position?.large && "global-mascot-large", (!position || position.hidden) && "global-mascot-hidden")}
+    aria-label="Companheiro Lumen" className={cn("global-mascot", position?.large && "global-mascot-large", position?.compact && "global-mascot-compact", (!position || position.hidden) && "global-mascot-hidden")}
     style={position ? { left: position.x, top: position.y } : undefined}>
     {open && <div id="mascot-message" data-mascot-bubble data-position={position?.bubble ?? "hidden"} className="mascot-bubble border-2 border-border bg-popover text-popover-foreground">
       <div className="flex items-center justify-between gap-2"><span className="font-display text-sm font-semibold text-primary">Lumen</span>
